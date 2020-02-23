@@ -1,4 +1,3 @@
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
