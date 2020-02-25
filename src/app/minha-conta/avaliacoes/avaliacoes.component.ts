@@ -12,4 +12,9 @@ export class AvaliacoesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  avaliacoes: any[] = [
+    { autor: "autorTeste", conteudo: "gostei muito do local, otimas mesas" },
+    { autor: "autor desonhecido", conteudo: "gostei muito do local, otimas mesas" },
+    { autor: "algum autor ai", conteudo: "gostei muito do local, otimas mesas" }
+  ]
 }

@@ -1,13 +1,13 @@
-<nav *ngIf="mostrarMenu" class="navbar navbar-expand-lg navbar-light bg-warning">
-  <a class="navbar-brand" href="#">Where I Go</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-warning">
+  <a class="navbar-brand" [routerLink]="'pagina-inicial'">Where I Go</a>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link">Pagina inicial <span class="sr-only">(current)</span></a>
+        <a [routerLink]="'pagina-inicial'" class="nav-link">Pagina inicial <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" href="#">Empresas</a>
+        <a class="nav-link" [routerLink]="'empresas'">Empresas</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -16,6 +16,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Minhas avalições</a>
+          <a class="dropdown-item" [routerLink]="'minha-conta'">Detalhes da conta</a>
           <a class="dropdown-item" href="#">Respostas</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Sair</a>
@@ -29,4 +30,6 @@
   </div>
 </nav>
 
-<login></login>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

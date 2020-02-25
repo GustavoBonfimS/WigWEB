@@ -8,6 +8,8 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './login/auth.service';
+import { MinhaContaRoutingModule } from './minha-conta/minha-conta-routing.module';
+import { MinhaContaModule } from './minha-conta/minha-conta.module';
 
 
 @NgModule({
@@ -19,6 +21,7 @@ import { AuthService } from './login/auth.service';
     SharedModule,
     BrowserModule,
     AppRoutingModule,
+    MinhaContaModule,
     BrowserAnimationsModule,
     FormsModule
   ],

@@ -12,4 +12,11 @@ export class MinhaContaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  conta: any = {
+    id: 1,
+    nome: "gustavo",
+    idade: "18 anos",
+    sexo: "masculino"
+  }
+
 }
