@@ -5,7 +5,7 @@ import { AvaliacoesComponent } from './avaliacoes/avaliacoes.component';
 import { RespostasComponent } from './respostas/respostas.component';
 
 const routes: Routes = [
-  { path: 'minha-conta', component: MinhaContaComponent, children: [
+  { path: '', component: MinhaContaComponent, children: [
     { path: 'avaliacoes', component: AvaliacoesComponent },
     { path: 'respostas', component: RespostasComponent },
   ]},

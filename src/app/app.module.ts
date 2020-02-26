@@ -8,9 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './login/auth.service';
-import { MinhaContaRoutingModule } from './minha-conta/minha-conta-routing.module';
-import { MinhaContaModule } from './minha-conta/minha-conta.module';
-
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -21,11 +19,10 @@ import { MinhaContaModule } from './minha-conta/minha-conta.module';
     SharedModule,
     BrowserModule,
     AppRoutingModule,
-    MinhaContaModule,
     BrowserAnimationsModule,
     FormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

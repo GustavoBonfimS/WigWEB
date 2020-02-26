@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col">
     <h3>Minha conta</h3>
-    <p> {{ conta.nome }} </p>
-    <p> {{ conta.idade }} </p>
-    <p> {{ conta.sexo }} </p>
+    <p> nome: {{ conta.nome }} </p>
+    <p> idade: {{ conta.idade }} </p>
+    <p> sexo: {{ conta.sexo }} </p>
 
-    <button class="btn btn-warning" [routerLink]="['avaliacoes', '']">ver avaliacoes</button>
+    <button class="btn btn-warning" [routerLink]="['avaliacoes']">ver avaliacoes</button>
   </div>
 
   <div class="col">

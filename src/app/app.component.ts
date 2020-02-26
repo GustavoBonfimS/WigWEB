@@ -18,4 +18,8 @@ export class AppComponent {
       mostrar => this.mostrarMenu = mostrar
     );
   }
+
+  sair() {
+    alert("sair works")
+  }
 }

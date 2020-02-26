@@ -9,6 +9,9 @@ import { UsuarioService } from './usuario.service';
     CommonModule
   ],
   exports: [
+    
+  ],
+  providers: [
     UsuarioService
   ]
 })
