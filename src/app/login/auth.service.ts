@@ -1,12 +1,13 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Usuario } from '../shared/classes/Usuario';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private _router: Router) { }
   
   private autenticado: boolean = false
   isUsuarioAutenticado = new EventEmitter<boolean>();
@@ -15,6 +16,7 @@ export class AuthService {
     if (Usuario.login === 'admin' && Usuario.senha === 'admin') {
       this.isUsuarioAutenticado.emit(true);
       this.autenticado = true;
+      this._router.navigate(['/pagina-inicial']);
       // direicionar para pagina home
     } else {
       this.isUsuarioAutenticado.emit(false);
