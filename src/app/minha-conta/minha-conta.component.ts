@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from '../shared/classes/Usuario';
+import { Cliente } from '../shared/classes/Cliente';
 
 @Component({
   selector: 'app-minha-conta',
@@ -10,7 +12,11 @@ export class MinhaContaComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.user = Cliente.getCliente();
+    console.log(this.user);
   }
+
+  user;
 
   conta: any = {
     id: 1,

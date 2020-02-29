@@ -11,11 +11,12 @@ export class AuthService {
   
   private autenticado: boolean = false
   isUsuarioAutenticado = new EventEmitter<boolean>();
-  validarLogin () {
+  validarLogin (login, senha) {
     // validação de login com o servidor
-    if (Usuario.login === 'admin' && Usuario.senha === 'admin') {
+    if (Usuario.login === login && Usuario.senha === senha) {
       this.isUsuarioAutenticado.emit(true);
       this.autenticado = true;
+      this.setUser(login)
       this._router.navigate(['/pagina-inicial']);
       // direicionar para pagina home
     } else {
@@ -23,10 +24,10 @@ export class AuthService {
     }
   }
 
-  getFullUser() {
-    // busca todo o objeto de usuario no banco de dados
+  setUser(login) {
+    // busca cliente e seta na classe
   }
-
+  
   // retorna se o usuario esta autenticado ou não para guarda de rotas
   isAuth() {
     return this.autenticado;

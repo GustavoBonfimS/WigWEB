@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col">
     <h3>Minha conta</h3>
-    <p> nome: {{ conta.nome }} </p>
-    <p> idade: {{ conta.idade }} </p>
-    <p> sexo: {{ conta.sexo }} </p>
+    <p> nome: {{ user.login }} </p>
+    <p> senha: {{ user.senha }} </p>
+    <p> email: {{ user?.email}} </p>
 
     <button class="btn btn-warning" [routerLink]="['avaliacoes']">ver avaliacoes</button>
   </div>
