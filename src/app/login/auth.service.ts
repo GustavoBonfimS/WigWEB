@@ -9,6 +9,7 @@ export class AuthService {
 
   constructor(private _router: Router) { }
   
+  tipo: string;
   private autenticado: boolean = false
   isUsuarioAutenticado = new EventEmitter<boolean>();
   validarLogin (login, senha) {
@@ -18,7 +19,6 @@ export class AuthService {
       this.autenticado = true;
       this.setUser(login)
       this._router.navigate(['/pagina-inicial']);
-      // direicionar para pagina home
     } else {
       this.isUsuarioAutenticado.emit(false);
     }
@@ -26,6 +26,7 @@ export class AuthService {
 
   setUser(login) {
     // busca cliente e seta na classe
+    // seta o this.tipo com o tipo do obj
   }
   
   // retorna se o usuario esta autenticado ou não para guarda de rotas
