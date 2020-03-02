@@ -26,7 +26,6 @@ export class AuthService {
 
   setUser(login) {
     // busca cliente e seta na classe
-    // seta o this.tipo com o tipo do obj
   }
   
   // retorna se o usuario esta autenticado ou não para guarda de rotas
