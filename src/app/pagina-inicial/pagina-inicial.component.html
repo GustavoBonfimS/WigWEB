@@ -1,1 +1,38 @@
-<p>pagina-inicial works!</p>
+<div class="container">
+
+    <div id="avaliacoes-recentes">
+        <div id="header">
+            <h3>Avaliações Recentes</h3>
+        </div> <br>
+        <hr>
+        <div class="row">
+            <div class="col" *ngFor="let av of avaliacoes">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"> {{ av.autor }} </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Nome da empresa</h6>
+                        <p class="card-text"> {{ av.conteudo }} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col" *ngFor="let av of avaliacoes">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"> {{ av.autor }} </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Nome da empresa</h6>
+                        <p class="card-text"> {{ av.conteudo }} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+    </div>
+    <!--avaliacoes-recentes-->
+</div>
+<!--container-->

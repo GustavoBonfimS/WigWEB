@@ -9,7 +9,10 @@ export class EmpresasComponent implements OnInit {
 
   constructor() { }
 
+  nomes: any;
   ngOnInit(): void {
+    this.nomes = ["teste1", "testando", "outroteste"];
+
   }
 
 }
