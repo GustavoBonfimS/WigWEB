@@ -12,11 +12,10 @@ export class MinhaContaComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.user = Cliente.getCliente();
     console.log(this.user);
   }
 
-  user;
+  user = null;
 
   conta: any = {
     id: 1,

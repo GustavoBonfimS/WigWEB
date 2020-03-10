@@ -16,13 +16,8 @@ export class LoginComponent implements OnInit {
 
   login: any;
   senha: any;
-  setUsuario() {
-    Usuario.login = this.login;
-    Usuario.senha = this.senha;
-  }
 
   fazerLogin() {
-    this.setUsuario();
     this._authService.validarLogin(this.login, this.senha);
   }
 }
