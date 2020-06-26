@@ -8,10 +8,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
+  // tslint:disable-next-line: variable-name
   constructor(private _router: Router,
-    private _http: HttpClient) { }
+              // tslint:disable-next-line: variable-name
+              private _http: HttpClient) { }
 
-  private autenticado: boolean = false
+  private autenticado = false;
   private user = new Usuario();
   isUsuarioAutenticado = new EventEmitter<boolean>();
   private tipo: string;
@@ -28,9 +30,9 @@ export class AuthService {
         this._router.navigate(['/pagina-inicial', login]);
       } else {
         this.isUsuarioAutenticado.emit(false);
-        alert("login ou senha incorretos");
+        alert('login ou senha incorretos');
       }
-    })
+    });
   }
 
   // retorna se o usuario esta autenticado ou não para guarda de rotas
@@ -39,8 +41,8 @@ export class AuthService {
   }
 
   isLoginValido(login, senha) {
-    var url = "http://localhost:8080/api/usuario/login/" + login + "/" + senha;
-    return this._http.get(url)
+    const url = 'http://localhost:8080/api/usuario/login/' + login + '/' + senha;
+    return this._http.get(url);
   }
-  
+
 }
