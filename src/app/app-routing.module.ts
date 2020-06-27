@@ -17,7 +17,7 @@ const routes: Routes = [
     canActivate: [AuthGuard], canLoad: [AuthGuard]
   },
   {
-    path: "minha-conta", loadChildren: () =>
+    path: 'minha-conta', loadChildren: () =>
       import('./minha-conta/minha-conta.module').then(m => m.MinhaContaModule),
     canActivate: [AuthGuard], canLoad: [AuthGuard]
   },

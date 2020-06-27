@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './login/auth.service';
 
 @Component({
@@ -9,17 +9,17 @@ import { AuthService } from './login/auth.service';
 export class AppComponent {
   title = 'WigWEB';
 
-  mostrarMenu: boolean = false;
+  mostrarMenu = false;
 
-  constructor(private _authService: AuthService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this._authService.isUsuarioAutenticado.subscribe(
+    this.authService.isUsuarioAutenticado.subscribe(
       mostrar => this.mostrarMenu = mostrar
     );
   }
 
   sair() {
-    alert("sair works")
+    alert('sair works');
   }
 }

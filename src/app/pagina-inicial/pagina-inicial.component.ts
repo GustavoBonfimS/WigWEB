@@ -14,8 +14,7 @@ import { Empresa } from '../shared/classes/Empresa';
 })
 export class PaginaInicialComponent implements OnInit {
 
-  constructor(private _methods: MethodsService,
-    private _route: ActivatedRoute) { }
+  constructor(private _methods: MethodsService) { }
 
   avaliacoes: Avaliacao[] = [];
   avaliacoes1: Avaliacao[] = [];
@@ -29,19 +28,18 @@ export class PaginaInicialComponent implements OnInit {
         this.avaliacoes = res;
         for (let i = 3; i < this.avaliacoes.length; i++) {
           this.avaliacoes1.push(this.avaliacoes[i]);
-        };
+        }
         for (let i = 0; i < res.length; i++) {
           this.buscarEmpresaPeloId(res[i].idempresa).subscribe(dados => {
             this.avaliacoes[i].nomeEmpresa = dados.login;
-          })
+          });
         }
-                
-      })
+      });
 
 
   }
 
   buscarEmpresaPeloId(idempresa) {
-    return this._methods.getEmpresa(idempresa)
+    return this._methods.getEmpresa(idempresa);
   }
 }
