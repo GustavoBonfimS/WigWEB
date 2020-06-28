@@ -11,9 +11,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder) { }
 
-  usernmae: any;
-  senha: any;
   formulario: FormGroup;
+  mostrarErroUsername = false;
+  mostrarErroSenha = false;
 
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
@@ -24,9 +24,17 @@ export class LoginComponent implements OnInit {
 
   fazerLogin() {
     if (this.formulario.valid) {
-
+      //  console.log(this.formulario);
       // this.authService.validarLogin(this.login, this.senha);
-      console.log(this.formulario);
+    } else {
+      Object.keys(this.formulario.controls).forEach(item => {
+        const campo = this.formulario.get(item);
+        campo.markAsTouched({ onlySelf: true });
+      });
     }
+  }
+
+  isValid(campo) {
+    return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
   }
 }
