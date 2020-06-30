@@ -10,8 +10,8 @@ export class AuthService {
 
   // tslint:disable-next-line: variable-name
   constructor(private _router: Router,
-              // tslint:disable-next-line: variable-name
-              private _http: HttpClient) { }
+    // tslint:disable-next-line: variable-name
+    private _http: HttpClient) { }
 
   private autenticado = false;
   private user = new Usuario();
@@ -20,9 +20,10 @@ export class AuthService {
 
   validarLogin(login, senha) {
     // validação de login com o servidor
-    this.isLoginValido(login, senha).subscribe(res => {
+    this.isLoginValido(login, senha).subscribe((res: any) => {
       if (res != null) {
-        this.user = Object.assign(this.user, res);
+        // this.user = Object.assign(this.user, res);
+        console.log(res.perfil);
         this.tipo = this.user.perfil;
 
         this.isUsuarioAutenticado.emit(true);
@@ -41,8 +42,13 @@ export class AuthService {
   }
 
   isLoginValido(login, senha) {
-    const url = 'http://localhost:8080/api/usuario/login/' + login + '/' + senha;
-    return this._http.get(url);
+    const url = '/api/usuario/Login';
+
+    const u = new Usuario();
+    u.login = login;
+    u.senha = senha;
+    console.log(JSON.stringify(u));
+    return this._http.post(url, u);
   }
 
 }

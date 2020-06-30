@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -12,8 +13,6 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private formBuilder: FormBuilder) { }
 
   formulario: FormGroup;
-  mostrarErroUsername = false;
-  mostrarErroSenha = false;
 
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
@@ -24,8 +23,9 @@ export class LoginComponent implements OnInit {
 
   fazerLogin() {
     if (this.formulario.valid) {
-      //  console.log(this.formulario);
-      // this.authService.validarLogin(this.login, this.senha);
+      const login = this.formulario.get('username').value;
+      const senha = this.formulario.get('senha').value;
+      this.authService.validarLogin(login, senha);
     } else {
       Object.keys(this.formulario.controls).forEach(item => {
         const campo = this.formulario.get(item);
