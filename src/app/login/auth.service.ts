@@ -3,9 +3,8 @@ import { Usuario } from '../shared/classes/Usuario';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { empty, Subject } from 'rxjs';
-import { AlertModalComponent } from '../shared/alert-modal/alert-modal.component';
+import { AlertModalService } from '../shared/alert-modal/alert-modal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +13,9 @@ export class AuthService {
 
   constructor(private router: Router,
               private http: HttpClient,
-              private modalService: BsModalService) { }
+              private alertModalService: AlertModalService) { }
 
   private autenticado = false;
-  private bsModalRef: BsModalRef;
   private user = new Usuario();
   mostrarMenu = new EventEmitter<boolean>();
 
@@ -64,9 +62,7 @@ export class AuthService {
     return this.http.post(url, u)
     .pipe(
       catchError(err => {
-        this.bsModalRef = this.modalService.show(AlertModalComponent);
-        this.bsModalRef.content.message = 'Falha ao se conectar com o servidor, tente novamente mais tarde.';
-
+        this.alertModalService.showAlertDanger('erro ao se conectar ao servidor, tente novamente mais tarde');
         // tslint:disable-next-line: deprecation
         return empty();
       })
