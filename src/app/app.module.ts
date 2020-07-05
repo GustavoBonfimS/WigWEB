@@ -11,6 +11,7 @@ import { AuthService } from './login/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PaginaInicialModule } from './pagina-inicial/pagina-inicial.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PaginaInicialModule } from './pagina-inicial/pagina-inicial.module';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    PaginaInicialModule
+    PaginaInicialModule,
+    ModalModule.forRoot()
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

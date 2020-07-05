@@ -2,6 +2,10 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Usuario } from '../shared/classes/Usuario';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { empty, Subject } from 'rxjs';
+import { AlertModalComponent } from '../shared/alert-modal/alert-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -9,16 +13,18 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
 
   constructor(private router: Router,
-              private http: HttpClient) { }
+              private http: HttpClient,
+              private modalService: BsModalService) { }
 
   private autenticado = false;
+  private bsModalRef: BsModalRef;
   private user = new Usuario();
   mostrarMenu = new EventEmitter<boolean>();
-  private tipo: string;
 
   validarLogin(login, senha) {
     // validação de login com o servidor
-    this.isLoginValido(login, senha).subscribe((res) => {
+    this.isLoginValido(login, senha)
+    .subscribe((res) => {
       if (res != null) {
         console.log(res);
 
@@ -55,7 +61,16 @@ export class AuthService {
     const u = new Usuario();
     u.login = login;
     u.senha = senha;
-    return this.http.post(url, u);
+    return this.http.post(url, u)
+    .pipe(
+      catchError(err => {
+        this.bsModalRef = this.modalService.show(AlertModalComponent);
+        this.bsModalRef.content.message = 'Falha ao se conectar com o servidor, tente novamente mais tarde.';
+
+        // tslint:disable-next-line: deprecation
+        return empty();
+      })
+    );
   }
 
 }
