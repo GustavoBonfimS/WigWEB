@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
               private formBuilder: FormBuilder) { }
 
   formulario: FormGroup;
+  submited = false;
 
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   fazerLogin() {
+    this.submited = true;
     if (this.formulario.valid) {
       const login = this.formulario.get('username').value;
       const senha = this.formulario.get('senha').value;
