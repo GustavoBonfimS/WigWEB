@@ -8,29 +8,37 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  // tslint:disable-next-line: variable-name
-  constructor(private _router: Router,
-    // tslint:disable-next-line: variable-name
-    private _http: HttpClient) { }
+  constructor(private router: Router,
+              private http: HttpClient) { }
 
   private autenticado = false;
   private user = new Usuario();
-  isUsuarioAutenticado = new EventEmitter<boolean>();
+  mostrarMenu = new EventEmitter<boolean>();
   private tipo: string;
 
   validarLogin(login, senha) {
     // validação de login com o servidor
-    this.isLoginValido(login, senha).subscribe((res: any) => {
+    this.isLoginValido(login, senha).subscribe((res) => {
       if (res != null) {
-        // this.user = Object.assign(this.user, res);
-        console.log(res.perfil);
-        this.tipo = this.user.perfil;
+        console.log(res);
 
-        this.isUsuarioAutenticado.emit(true);
+        this.user = Object.assign(res);
+
+        switch (this.user.perfil) {
+          case 'cliente':
+            this.router.navigate(['/pagina-inicial', login]);
+            break;
+          case 'admin':
+            // redirect para modulo de admin
+            break;
+          case 'empresa':
+          // redirect para modulo de empresa
+        }
+
+        this.mostrarMenu.emit(true);
         this.autenticado = true;
-        this._router.navigate(['/pagina-inicial', login]);
       } else {
-        this.isUsuarioAutenticado.emit(false);
+        this.mostrarMenu.emit(false);
         alert('login ou senha incorretos');
       }
     });
@@ -41,14 +49,13 @@ export class AuthService {
     return this.autenticado;
   }
 
-  isLoginValido(login, senha) {
+  isLoginValido(login: string, senha: string) {
     const url = '/api/usuario/Login';
 
     const u = new Usuario();
     u.login = login;
     u.senha = senha;
-    console.log(JSON.stringify(u));
-    return this._http.post(url, u);
+    return this.http.post(url, u);
   }
 
 }

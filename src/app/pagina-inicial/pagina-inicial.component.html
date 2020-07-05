@@ -6,7 +6,7 @@
         </div> <br>
         <hr>
         <div class="row">
-            <div class="col" *ngFor="let av of avaliacoes | slice:0:3; let i = index">
+            <div class="col" *ngFor="let av of avLinha1 | slice:0:3; let i = index">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title"> {{ av.autor }} </h5>
@@ -20,7 +20,7 @@
         <br>
 
         <div class="row">
-            <div class="col" *ngFor="let av of avaliacoes1 | slice:0:3;">
+            <div class="col" *ngFor="let av of avLinha2 | slice:0:3;">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title"> {{ av.autor }} </h5>

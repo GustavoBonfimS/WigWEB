@@ -14,24 +14,24 @@ import { Empresa } from '../shared/classes/Empresa';
 })
 export class PaginaInicialComponent implements OnInit {
 
-  constructor(private _methods: MethodsService) { }
+  constructor(private methods: MethodsService) { }
 
-  avaliacoes: Avaliacao[] = [];
-  avaliacoes1: Avaliacao[] = [];
-  empresas = [];
-  empresas1: Empresa[] = [];
+  avLinha1: Avaliacao[] = [];
+  avLinha2: Avaliacao[] = [];
+  empLinha1 = [];
+  empLinha2: Empresa[] = [];
 
   ngOnInit(): void {
     // usar o service para buscar avaliacoes
-    this._methods.listAvaliacoes()
+    this.methods.listAvaliacoes()
       .subscribe(res => {
-        this.avaliacoes = res;
-        for (let i = 3; i < this.avaliacoes.length; i++) {
-          this.avaliacoes1.push(this.avaliacoes[i]);
+        this.avLinha1 = res;
+        for (let i = 3; i < this.avLinha1.length; i++) {
+          this.avLinha2.push(this.avLinha1[i]);
         }
         for (let i = 0; i < res.length; i++) {
           this.buscarEmpresaPeloId(res[i].idempresa).subscribe(dados => {
-            this.avaliacoes[i].nomeEmpresa = dados.login;
+            this.avLinha1[i].nomeEmpresa = dados.login;
           });
         }
       });
@@ -40,6 +40,6 @@ export class PaginaInicialComponent implements OnInit {
   }
 
   buscarEmpresaPeloId(idempresa) {
-    return this._methods.getEmpresa(idempresa);
+    return this.methods.getEmpresa(idempresa);
   }
 }

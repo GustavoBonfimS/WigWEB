@@ -14,7 +14,7 @@ export class AppComponent {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.authService.isUsuarioAutenticado.subscribe(
+    this.authService.mostrarMenu.subscribe(
       mostrar => this.mostrarMenu = mostrar
     );
   }
