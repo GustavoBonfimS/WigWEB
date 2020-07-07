@@ -4,6 +4,7 @@ import { MethodsService } from './methods.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { AlertModalService } from './alert-modal/alert-modal.service';
 
 
 @NgModule({
@@ -14,10 +15,11 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
   ],
   exports: [
     AlertModalComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
   ],
   providers: [
     MethodsService,
+    AlertModalService
   ],
   entryComponents: [
     AlertModalComponent,

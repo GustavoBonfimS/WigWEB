@@ -35,7 +35,7 @@ export class AlertModalService {
   }
 
   showConfirm(title: string, msg: string, okTXt?: string, cancelTxt?: string) {
-    const bsModalRef: BsModalRef = this.modalService.show(ConfirmModalComponent);;
+    const bsModalRef: BsModalRef = this.modalService.show(ConfirmModalComponent);
     bsModalRef.content.title = title;
     bsModalRef.content.message = msg;
 
@@ -46,5 +46,7 @@ export class AlertModalService {
     if (cancelTxt) {
       bsModalRef.content.cancelTxt = cancelTxt;
     }
+
+    return (bsModalRef.content as ConfirmModalComponent).confirmResult;
   }
 }
