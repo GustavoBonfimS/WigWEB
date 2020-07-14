@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Empresa } from '../shared/classes/Empresa';
+import { MethodsService } from '../shared/methods.service';
 
 @Component({
   selector: 'app-empresas',
@@ -7,12 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmpresasComponent implements OnInit {
 
-  constructor() { }
+  itemHover = false;
+  constructor(private methods: MethodsService) { }
 
-  nomes: any;
+  empresas$: Observable<Empresa[]>;
   ngOnInit(): void {
-    this.nomes = ["teste1", "testando", "outroteste"];
-
+    this.empresas$ = this.methods.listEmpresas();
   }
 
 }

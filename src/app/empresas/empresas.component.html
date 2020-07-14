@@ -1,5 +1,6 @@
-<button class="btn btn-warning" [routerLink]="'perfil'">perfil</button>
-
-<ul>
-    <li *ngFor="let item of nomes"> {{ item }}</li>
+<ul class="list-group">
+  <li class="list-group-item" [ngClass]="{'list-group-item-warning': itemHover}" 
+  (mouseover)="itemHover=true" (mouseout)="itemHover=false"
+  *ngFor="let item of empresas$ | async"
+  [routerLink]="['perfil', item.login]">{{ item.login }} - {{ item.endereco }}</li>
 </ul>

@@ -5,7 +5,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 
 const routes: Routes = [
     { path: '', component: EmpresasComponent },
-    { path: 'perfil', component: PerfilComponent },
+    { path: 'perfil/:nome', component: PerfilComponent },
 
   ];
 

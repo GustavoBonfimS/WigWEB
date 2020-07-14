@@ -2,7 +2,6 @@
   <div id="header">
     <h3>Avaliações Recentes</h3>
   </div> <br>
-  <hr>
   <div class="row">
     <div class="col" *ngFor="let av of avaliacoes$ | async">
       <div class="card" style="width: 18rem;">
@@ -14,23 +13,6 @@
       </div>
     </div>
   </div>
-
-  <br>
-
-  <!--
-  <div class="row">
-    <div class="col" *ngFor="let av of avLinha2 | slice:0:3;">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title"> {{ av.autor }} </h5>
-          <h6 class="card-subtitle mb-2 text-muted"> {{ av.nomeEmpresa }} </h6>
-          <p class="card-text"> {{ av.conteudo }} </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  -->
-
   <hr>
 </div>
 <!--avaliacoes-recentes-->

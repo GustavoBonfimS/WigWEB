@@ -51,12 +51,6 @@ body.my-login-page {
 	padding: 12px 10px;
 }
 
-.my-login-page .footer {
-	margin: 40px 0;
-	color: #888;
-	text-align: center;
-}
-
 @media screen and (max-width: 425px) {
 	.my-login-page .card-wrapper {
 		width: 90%;

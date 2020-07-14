@@ -18,7 +18,6 @@ export class MethodsService {
               private alertModalService: AlertModalService) { }
 
   private baseUrl = "http://localhost:8080/api/";
-  lista: Cliente[];
 
   listAvaliacoes() {
     return this.verificaErro(this.http.get<Avaliacao[]>('api/cliente/Avaliacao/Listar'));
@@ -79,6 +78,10 @@ export class MethodsService {
     return this.http.get<Empresa>('api/empresa/get/id/${idempresa}')
   }
 
+  listEmpresas() {
+    return this.verificaErro(this.http.get<Empresa[]>('api/empresa/Listar'));
+  }
+  // -----
   private verificaErro(obs: Observable<any>) {
     return obs.pipe(
       catchError(err => {

@@ -13,10 +13,6 @@ export class PaginaInicialComponent implements OnInit {
 
   constructor(private methods: MethodsService) { }
 
-  avLinha1: Avaliacao[] = [];
-  avLinha2: Avaliacao[] = [];
-  empLinha1 = [];
-  empLinha2: Empresa[] = [];
   avaliacoes$: Observable<Avaliacao[]>;
 
   ngOnInit(): void {
