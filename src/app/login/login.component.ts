@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
       const senha = this.formulario.get('senha').value;
       this.authService.validarLogin(login, senha);
     } else {
+      // valida campos
       Object.keys(this.formulario.controls).forEach(item => {
         const campo = this.formulario.get(item);
         campo.markAsTouched({ onlySelf: true });

@@ -5,6 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { empty, Subject } from 'rxjs';
 import { AlertModalService } from '../shared/alert-modal/alert-modal.service';
+import { MethodsService } from '../shared/methods.service';
+import { Cliente } from '../shared/classes/Cliente';
+import { ClienteCacheDataService } from '../shared/cliente-cache-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,61 +15,45 @@ import { AlertModalService } from '../shared/alert-modal/alert-modal.service';
 export class AuthService {
 
   constructor(private router: Router,
-              private http: HttpClient,
-              private alertModalService: AlertModalService) { }
+              private methods: MethodsService,
+              private modalService: AlertModalService,
+              private clienteCacheData: ClienteCacheDataService) { }
 
   private autenticado = false;
-  private user = new Usuario();
   mostrarMenu = new EventEmitter<boolean>();
 
   validarLogin(login, senha) {
+
     // validação de login com o servidor
-    this.isLoginValido(login, senha)
-    .subscribe((res) => {
-      if (res != null) {
-        console.log(res);
+    this.methods.onLogin(login, senha)
+      .subscribe((res: any) => {
+        if (res != null) {
+          switch (res.perfil) {
+            case 'cliente':
+              this.router.navigate(['/pagina-inicial']);
+              this.clienteCacheData.setCliente(res);
+              break;
+            case 'admin':
+              // redirect para modulo de admin
+              this.modalService.showAlertSuccess('modulo de admin não esta pronto');
+              break;
+            case 'empresa':
+              // redirect para modulo de empresa
+              this.modalService.showAlertSuccess('modulo de empresa não esta pronto');
+              break;
+          }
 
-        this.user = Object.assign(res);
-
-        switch (this.user.perfil) {
-          case 'cliente':
-            this.router.navigate(['/pagina-inicial', login]);
-            break;
-          case 'admin':
-            // redirect para modulo de admin
-            break;
-          case 'empresa':
-          // redirect para modulo de empresa
+          this.mostrarMenu.emit(true);
+          this.autenticado = true;
+        } else {
+          this.mostrarMenu.emit(false);
+          this.modalService.showAlertDanger('login ou senha incorretos');
         }
-
-        this.mostrarMenu.emit(true);
-        this.autenticado = true;
-      } else {
-        this.mostrarMenu.emit(false);
-        alert('login ou senha incorretos');
-      }
-    });
+      });
   }
 
   // retorna se o usuario esta autenticado ou não para guarda de rotas
   isAuth() {
     return this.autenticado;
   }
-
-  isLoginValido(login: string, senha: string) {
-    const url = '/api/usuario/Login';
-
-    const u = new Usuario();
-    u.login = login;
-    u.senha = senha;
-    return this.http.post(url, u)
-    .pipe(
-      catchError(err => {
-        this.alertModalService.showAlertDanger('erro ao se conectar ao servidor, tente novamente mais tarde');
-        // tslint:disable-next-line: deprecation
-        return empty();
-      })
-    );
-  }
-
 }
