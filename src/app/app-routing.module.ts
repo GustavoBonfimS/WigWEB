@@ -4,9 +4,11 @@ import { PaginaInicialComponent } from './pagina-inicial/pagina-inicial.componen
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { CriarContaComponent } from './login/criar-conta/criar-conta.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'criar-conta', component: CriarContaComponent },
   {
     path: 'pagina-inicial', component: PaginaInicialComponent,
     canActivate: [AuthGuard], canLoad: [AuthGuard]

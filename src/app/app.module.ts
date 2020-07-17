@@ -12,12 +12,14 @@ import { AuthGuard } from './guards/auth.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PaginaInicialModule } from './pagina-inicial/pagina-inicial.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CriarContaComponent } from './login/criar-conta/criar-conta.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CriarContaComponent
   ],
   imports: [
     SharedModule,
