@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../shared/classes/Usuario';
 import { Cliente } from '../shared/classes/Cliente';
+import { MethodsService } from '../shared/methods.service';
+import { ClienteCacheDataService } from '../shared/cliente-cache-data.service';
 
 @Component({
   selector: 'app-minha-conta',
@@ -9,19 +11,14 @@ import { Cliente } from '../shared/classes/Cliente';
 })
 export class MinhaContaComponent implements OnInit {
 
-  constructor() { }
+  user: Cliente;
+
+  constructor(private methods: MethodsService,
+              private clienteCacheService: ClienteCacheDataService) { }
 
   ngOnInit(): void {
-    console.log(this.user);
+      this.user = this.clienteCacheService.getClienteLogado();
   }
 
-  user = null;
-
-  conta: any = {
-    id: 1,
-    nome: "gustavo",
-    idade: "18 anos",
-    sexo: "masculino"
-  }
 
 }

@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MethodsService } from 'src/app/shared/methods.service';
+import { Observable } from 'rxjs';
+import { Avaliacao } from 'src/app/shared/classes/Avaliacao';
+import { ClienteCacheDataService } from 'src/app/shared/cliente-cache-data.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-avaliacoes',
@@ -7,14 +12,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AvaliacoesComponent implements OnInit {
 
-  constructor() { }
+  avaliacoes$: Observable<Avaliacao[]>;
+
+  constructor(private methods: MethodsService,
+              private clienteCacheService: ClienteCacheDataService) { }
 
   ngOnInit(): void {
+    this.avaliacoes$ = this.methods.getMinhasAvaliacoes(this.clienteCacheService.getClienteLogado().idcliente)
+    .pipe(take(1));
   }
-
-  avaliacoes: any[] = [
-    { autor: "autorTeste", conteudo: "gostei muito do local, otimas mesas" },
-    { autor: "autor desonhecido", conteudo: "gostei muito do local, otimas mesas" },
-    { autor: "algum autor ai", conteudo: "gostei muito do local, otimas mesas" }
-  ]
 }

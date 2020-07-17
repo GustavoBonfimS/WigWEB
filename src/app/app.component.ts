@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './login/auth.service';
+import { ClienteCacheDataService } from './shared/cliente-cache-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'WigWEB';
 
   mostrarMenu = false;
@@ -20,6 +22,6 @@ export class AppComponent {
   }
 
   sair() {
-    alert('sair works');
+    this.authService.logOut();
   }
 }

@@ -17,4 +17,8 @@ export class ClienteCacheDataService {
   getClienteLogado() {
     return this.cliente;
   }
+
+  logOut() {
+    this.cliente = null;
+  }
 }

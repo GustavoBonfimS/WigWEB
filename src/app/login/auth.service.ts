@@ -56,4 +56,11 @@ export class AuthService {
   isAuth() {
     return this.autenticado;
   }
+
+  logOut() {
+    this.autenticado = false;
+    this.mostrarMenu.emit(false);
+    this.clienteCacheData.logOut();
+    this.router.navigate(['login']);
+  }
 }
