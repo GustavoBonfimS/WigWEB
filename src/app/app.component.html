@@ -1,7 +1,10 @@
 <nav *ngIf="mostrarMenu" class="navbar navbar-expand-lg navbar-light bg-warning">
   <a class="navbar-brand" [routerLink]="'pagina-inicial'">Where I Go</a>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
         <a [routerLink]="'pagina-inicial'" class="nav-link">Pagina inicial <span class="sr-only">(current)</span></a>
@@ -10,7 +13,7 @@
         <a class="nav-link" [routerLink]="'empresas'">Empresas</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           Minha conta
         </a>
@@ -18,7 +21,7 @@
           <a class="dropdown-item" [routerLink]="'minha-conta/avaliacoes'">Minhas avalições</a>
           <a class="dropdown-item" [routerLink]="'minha-conta/respostas'">Respostas</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="sair()">Sair</a>
+          <a class="dropdown-item" [routerLink]="" (click)="sair()">Sair</a>
         </div>
       </li>
     </ul>

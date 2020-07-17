@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './login/auth.service';
 import { ClienteCacheDataService } from './shared/cliente-cache-data.service';
 import { Router } from '@angular/router';
+import { AlertModalService } from './shared/alert-modal/alert-modal.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ export class AppComponent implements OnInit {
 
   mostrarMenu = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, 
+              private alertModal: AlertModalService) { }
 
   ngOnInit(): void {
     this.authService.mostrarMenu.subscribe(
@@ -22,6 +24,11 @@ export class AppComponent implements OnInit {
   }
 
   sair() {
-    this.authService.logOut();
+    this.alertModal.showConfirm('Sair', 'Tem certeza que deseja sair da aplicação?', 'sim', 'cancelar')
+    .subscribe((res: boolean) => {
+      if (res === true) {
+        this.authService.logOut();
+      }
+    })
   }
 }
