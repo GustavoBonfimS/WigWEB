@@ -55,6 +55,11 @@ export class MethodsService {
     return this.verificaErro(this.http.get(url));
   }
 
+  getRespostasDoCliente(idcliente: number) {
+    const url = 'api/cliente/Avaliacao/Resposta/Listar/Cliente/' + idcliente;
+    return this.verificaErro(this.http.get<Avaliacao[]>(url));
+  }
+
   // ------
 
   getUsuario(login: string) {
