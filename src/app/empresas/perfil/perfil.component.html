@@ -1,1 +1,27 @@
-<p>perfil works!</p>
+<h4 class="text-center title"> {{ empresa.login }}</h4>
+
+<div class="row">
+  <div class="col">
+    <h1 class="text-center subtilte">Sobre</h1>
+
+    <strong>Endereço:</strong> {{ empresa.endereco }} <br>
+    <strong>Tipo:</strong> {{ empresa.tipo }} <br>
+    <strong>Email de contato:</strong> {{ empresa.email }} <br>
+    <strong>CNPJ:</strong> {{ empresa.CNPJ }}
+  </div>
+
+  <div class="col-9" style="padding-left: 40px;">
+    <h1 class="text-center subtitle">Ultimas avaliações</h1>
+    <div class="row">
+        <div class="col" *ngFor="let av of avaliacoes$ | async">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title"> {{ av.autor }} </h5>
+                  <p class="card-text"> {{ av.conteudo }} </p>
+                </div>
+              </div>
+        </div>
+    </div>
+
+  </div>
+</div>

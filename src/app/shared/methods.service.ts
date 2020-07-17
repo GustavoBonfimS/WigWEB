@@ -17,51 +17,48 @@ export class MethodsService {
   constructor(private http: HttpClient,
               private alertModalService: AlertModalService) { }
 
-  private baseUrl = "http://localhost:8080/api/";
-
   listAvaliacoes() {
     return this.verificaErro(this.http.get<Avaliacao[]>('api/cliente/Avaliacao/Listar'));
   }
 
-  insertAvaliacao(avaliacao) {
-    var url = "cliente/Avaliacao/Inserir";
-    return this.http.post(this.baseUrl + url, avaliacao);
+  insertAvaliacao(avaliacao: Avaliacao) {
+    const url = 'api/cliente/Avaliacao/Inserir';
+    return this.verificaErro(this.http.post(url, avaliacao));
   }
 
   getAvaliacao(conteudo: string) {
-    var url = 'cliente/Avaliacao/get/${conteudo}';
-    return this.http.get(this.baseUrl + url);
+    const url = 'api/cliente/Avaliacao/get/' + conteudo;
+    return this.verificaErro(this.http.get<Avaliacao>(url));
   }
 
-  getMinhasAvaliacoes(idcliente) {
-    var url = 'cliente/Avaliacao/minhas/${idcliente}';
-    return this.http.get(this.baseUrl + url);
+  getMinhasAvaliacoes(idcliente: number) {
+    const url = 'api/cliente/Avaliacao/minhas/' + idcliente;
+    return this.verificaErro(this.http.get<Avaliacao[]>(url));
   }
 
-  getAvaliacoesEmpresas(idempresa) {
-    var url = 'cliente/Avaliacao/Listar/${idempresa}';
-    return this.http.get(this.baseUrl + url);
+  getAvaliacoesEmpresas(idempresa: number) {
+    return this.verificaErro(this.http.get<Avaliacao[]>('api/cliente/Avaliacao/Listar/' + idempresa));
   }
-  
+
   atualizarIndex(login: string) {
-    var url = "cliente/atualizarIndex/" + login;
-    return this.http.get<Avaliacao[]>(this.baseUrl + url);
+    const url = 'api/cliente/atualizarIndex/' + login;
+    return this.verificaErro(this.http.get(url));
   }
 
   responderAvaliacao(avaliacao: Avaliacao) {
-    var url = "cliente/Avaliacao/Responder";
-    return this.http.post(this.baseUrl + url, avaliacao);
+    const url = 'api/cliente/Avaliacao/Responder';
+    return this.verificaErro(this.http.post(url, avaliacao));
   }
 
-  getRespostasAvaliacao(idavaliacao) {
-    var url = "cliente/Avaliacao/Resposta/get/" + idavaliacao;
-    return this.http.get(this.baseUrl + url);
+  getRespostasAvaliacao(idavaliacao: number) {
+    const url = 'api/cliente/Avaliacao/Resposta/get/' + idavaliacao;
+    return this.verificaErro(this.http.get(url));
   }
 
   // ------
 
-  getUsuario(login) {
-    return this.verificaErro(this.http.get<Usuario>('api/usuario/get/${login}'));
+  getUsuario(login: string) {
+    return this.verificaErro(this.http.get<Usuario>('api/usuario/get/' + login));
   }
 
   onLogin(login: string, senha: string) {
@@ -74,8 +71,12 @@ export class MethodsService {
 
   // -----
 
-  getEmpresa(idempresa) {
-    return this.http.get<Empresa>('api/empresa/get/id/${idempresa}')
+  getEmpresa(idempresa: number) {
+    return this.verificaErro(this.http.get<Empresa>('api/empresa/get/id/' + idempresa));
+  }
+
+  getEmpresaPeloNome(nome: string) {
+    return this.verificaErro(this.http.get<Empresa>('api/empresa/get/nome/' + nome));
   }
 
   listEmpresas() {
@@ -88,6 +89,6 @@ export class MethodsService {
         this.alertModalService.showAlertDanger('erro ao se conectar ao servidor, tente novamente mais tarde');
         return EMPTY;
       })
-    )
+    );
   }
 }
