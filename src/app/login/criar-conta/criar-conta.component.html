@@ -1,1 +1,54 @@
-<p>criar-conta works!</p>
+ <div class="signup-form">
+  <form [formGroup]="formulario" (ngSubmit)="cadastrar()">
+    <h2>Crie uma conta</h2>
+    <p>Preencha os campos para criar uma nova conta</p>
+    <hr />
+    <div class="form-group">
+      <div class="row">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="username"
+            placeholder="Login"
+            [ngClass]="{'is-invalid': submited && isValid('username')}"
+            />
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email"
+        [ngClass]="{'is-invalid': submited && isValid('email')}"
+        placeholder="Email"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="password"
+        class="form-control"
+        formControlName="senha"
+        placeholder="Senha"
+        [ngClass]="{'is-invalid': submited && isValid('senha')}"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="password"
+        class="form-control"
+        formControlName="confirmarSenha"
+        placeholder="Confirme a senha"
+        [ngClass]="{'is-invalid': submited && isValid('confirmarSenha')}"
+      />
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-warning btn-lg">Cadastrar-se</button>
+    </div>
+  </form>
+  <div class="hint-text">
+    Já tem uma conta? <a [routerLink]="['/login']">Fazer login</a>
+  </div>
+
+</div>
