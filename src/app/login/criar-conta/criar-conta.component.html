@@ -14,6 +14,15 @@
             [ngClass]="{'is-invalid': submited && isValid('username')}"
             />
         </div>
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="CPF"
+            placeholder="CPF"
+            [ngClass]="{'is-invalid': submited && isValid('CPF')}"
+            />
+        </div>
       </div>
     </div>
     <div class="form-group">

@@ -6,7 +6,6 @@ import { Usuario } from './classes/Usuario';
 import { Empresa } from './classes/Empresa';
 import { catchError, take } from 'rxjs/operators';
 import { AlertModalService } from './alert-modal/alert-modal.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Cliente } from './classes/Cliente';
 
 @Injectable({
@@ -71,6 +70,11 @@ export class MethodsService {
     const user = new Usuario();
     user.login = login;
     user.senha = senha;
+    return this.verificaErro(this.http.post(url, user));
+  }
+
+  cadastrar(user: Cliente) {
+    const url = 'api/usuario/Inserir';
     return this.verificaErro(this.http.post(url, user));
   }
 

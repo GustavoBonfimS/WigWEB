@@ -1,13 +1,11 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Usuario } from '../shared/classes/Usuario';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { empty, Subject } from 'rxjs';
 import { AlertModalService } from '../shared/alert-modal/alert-modal.service';
 import { MethodsService } from '../shared/methods.service';
 import { Cliente } from '../shared/classes/Cliente';
 import { ClienteCacheDataService } from '../shared/cliente-cache-data.service';
+import { FormGroup } from '@angular/forms';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +13,9 @@ import { ClienteCacheDataService } from '../shared/cliente-cache-data.service';
 export class AuthService {
 
   constructor(private router: Router,
-              private methods: MethodsService,
-              private modalService: AlertModalService,
-              private clienteCacheData: ClienteCacheDataService) { }
+    private methods: MethodsService,
+    private modalService: AlertModalService,
+    private clienteCacheData: ClienteCacheDataService) { }
 
   private autenticado = false;
   mostrarMenu = new EventEmitter<boolean>();
@@ -62,5 +60,25 @@ export class AuthService {
     this.mostrarMenu.emit(false);
     this.clienteCacheData.logOut();
     this.router.navigate(['login']);
+  }
+
+  cadastrar(form: FormGroup) {
+    const user = new Cliente();
+    user.login = form.get('username').value;
+    user.senha = form.get('senha').value;
+    user.email = form.get('email').value;
+    user.CPF = form.get('CPF').value;
+    user.perfil = 'cliente';
+    this.methods.cadastrar(user).pipe(
+      take(1)
+    ).subscribe((resposta: Cliente) => {
+      // tslint:disable-next-line: no-unused-expression
+      if (resposta != null) {
+        this.clienteCacheData.setCliente(resposta);
+        this.mostrarMenu.emit(true);
+        this.autenticado = true;
+        this.router.navigate(['/pagina-inicial']);
+      }
+    });
   }
 }
