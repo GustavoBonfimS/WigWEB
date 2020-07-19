@@ -13,9 +13,9 @@ import { take } from 'rxjs/operators';
 export class AuthService {
 
   constructor(private router: Router,
-    private methods: MethodsService,
-    private modalService: AlertModalService,
-    private clienteCacheData: ClienteCacheDataService) { }
+              private methods: MethodsService,
+              private modalService: AlertModalService,
+              private clienteCacheData: ClienteCacheDataService) { }
 
   private autenticado = false;
   mostrarMenu = new EventEmitter<boolean>();

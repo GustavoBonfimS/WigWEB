@@ -13,6 +13,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { PaginaInicialModule } from './pagina-inicial/pagina-inicial.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CriarContaComponent } from './login/criar-conta/criar-conta.component';
+import { PesquisaComponent } from './pesquisa/pesquisa.component';
 
 @NgModule({
   declarations: [
