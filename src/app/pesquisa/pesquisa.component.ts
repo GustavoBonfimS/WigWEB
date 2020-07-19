@@ -22,13 +22,16 @@ export class PesquisaComponent implements OnInit {
   ngOnInit(): void {
     this.result$ = this.activatedRoute.queryParams
       .pipe(
-        tap(param => {
-          if (!param.emp) {
-            console.log('null');
-          }
-        }),
         map(param => param.emp),
-        switchMap(emp => this.methods.pesquisar(emp)));
+        switchMap(emp => this.methods.pesquisar(emp)),
+        tap(res => {
+          if (res == null) {
+            this.isResultNotFound = true;
+          } else {
+            this.isResultNotFound = false;
+          }
+        })
+        );
   }
 
 }
