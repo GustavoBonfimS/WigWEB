@@ -1,1 +1,9 @@
-<p>pesquisa works!</p>
+<div class="list-group">
+  <a class="list-group-item list-group-item-action" [ngClass]="{'list-group-item-warning': itemHover}"
+    (mouseover)="itemHover=true" (mouseout)="itemHover=false" *ngFor="let empresa of result$ | async"
+    [routerLink]="['/empresas/perfil', empresa.login]">
+    {{ empresa.login }} - {{ empresa.endereco }}
+  </a>
+</div>
+
+

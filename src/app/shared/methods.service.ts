@@ -78,6 +78,11 @@ export class MethodsService {
     return this.verificaErro(this.http.post(url, user));
   }
 
+  pesquisar(empresa: string) {
+      const url = 'api/empresa/pesquisa/' + empresa;
+      return this.verificaErro(this.http.get<Empresa[]>(url));
+  }
+
   // -----
 
   getEmpresa(idempresa: number) {
@@ -91,7 +96,9 @@ export class MethodsService {
   listEmpresas() {
     return this.verificaErro(this.http.get<Empresa[]>('api/empresa/Listar'));
   }
+
   // -----
+
   private verificaErro(obs: Observable<any>) {
     return obs.pipe(
       catchError(err => {

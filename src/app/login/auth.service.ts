@@ -34,11 +34,11 @@ export class AuthService {
             case 'admin':
               // redirect para modulo de admin
               this.modalService.showAlertSuccess('modulo de admin não esta pronto');
-              break;
+              return;
             case 'empresa':
               // redirect para modulo de empresa
               this.modalService.showAlertSuccess('modulo de empresa não esta pronto');
-              break;
+              return;
           }
 
           this.mostrarMenu.emit(true);

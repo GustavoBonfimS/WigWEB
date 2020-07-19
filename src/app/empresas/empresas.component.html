@@ -1,6 +1,6 @@
 <div class="list-group">
   <a class="list-group-item list-group-item-action" [ngClass]="{'list-group-item-warning': itemHover}"
-    (mouseover)="itemHover=true" (mouseout)="itemHover=false" 
+    (mouseover)="itemHover=true" (mouseout)="itemHover=false"
     *ngFor="let item of empresas$ | async"
     [routerLink]="['perfil', item.login]">
     {{ item.login }} - {{ item.endereco }}

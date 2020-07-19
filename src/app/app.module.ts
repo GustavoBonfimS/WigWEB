@@ -13,8 +13,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { PaginaInicialModule } from './pagina-inicial/pagina-inicial.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CriarContaComponent } from './login/criar-conta/criar-conta.component';
-import { PesquisaComponent } from './pesquisa/pesquisa.component';
-
+import { PesquisaModule } from './pesquisa/pesquisa.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +29,7 @@ import { PesquisaComponent } from './pesquisa/pesquisa.component';
     FormsModule,
     ReactiveFormsModule,
     PaginaInicialModule,
+    PesquisaModule,
     ModalModule.forRoot()
   ],
   providers: [AuthService, AuthGuard],

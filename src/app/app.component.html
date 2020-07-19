@@ -1,7 +1,8 @@
 <nav *ngIf="mostrarMenu" class="navbar navbar-expand-lg navbar-light bg-warning">
   <a class="navbar-brand" [routerLink]="'pagina-inicial'">Where I Go</a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Alterna navegação">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
@@ -26,8 +27,10 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="pesquisa" aria-label="pesquisa">
-      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Pesquisar</button>
+      <input class="form-control mr-sm-2" type="search" name="pesquisa"
+      placeholder="pesquisa" aria-label="pesquisa" [(ngModel)]="search" required>
+      <button class="btn btn-outline-light my-2 my-sm-0" (click)="pesquisar()"
+      type="submit">Pesquisar</button>
     </form>
   </div>
 </nav>

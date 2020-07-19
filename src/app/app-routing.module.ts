@@ -15,8 +15,7 @@ const routes: Routes = [
     canActivate: [AuthGuard], canLoad: [AuthGuard]
   },
   {
-    path: 'pesquisar', loadChildren: () =>
-      import('./pesquisa/pesquisa.module'),
+    path: 'pesquisar', component: PesquisaComponent,
     canActivate: [AuthGuard], canLoad: [AuthGuard]
   },
   {
