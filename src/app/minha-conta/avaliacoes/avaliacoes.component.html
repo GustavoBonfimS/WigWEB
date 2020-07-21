@@ -1,5 +1,5 @@
 <ul class="list-group">
   <li *ngFor="let a of avaliacoes$ | async" class="list-group-item">
-      {{ a.autor }}
+      {{ a.conteudo }} - {{ a.nomeEmpresa }} - {{ a.data | date:'dd/MM/yyyy' }}
   </li>
 </ul>
