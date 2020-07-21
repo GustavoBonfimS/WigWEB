@@ -1,11 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MethodsService } from '../methods.service';
 import { Empresa } from '../classes/Empresa';
 import { ClienteCacheDataService } from '../cliente-cache-data.service';
 import { Cliente } from '../classes/Cliente';
-import { Avaliacao } from '../classes/Avaliacao';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { AlertModalService } from '../alert-modal/alert-modal.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-rating-modal',
@@ -17,34 +15,23 @@ export class RatingModalComponent implements OnInit {
   message: string;
   @Input() empresa: Empresa;
   cliente: Cliente;
+  result: Subject<string>;
 
-  constructor(private methods: MethodsService,
-              private bsModalRef: BsModalRef,
-              private clienteCacheData: ClienteCacheDataService,
-              private modalService: AlertModalService) { }
+  constructor(private bsModalRef: BsModalRef,
+              private clienteCacheData: ClienteCacheDataService) { }
 
   ngOnInit(): void {
     this.cliente = this.clienteCacheData.getClienteLogado();
+    this.result = new Subject();
   }
 
   onSend() {
-    const avaliacao = new Avaliacao();
-    avaliacao.autor = this.cliente.login;
-    avaliacao.conteudo = this.message;
-    avaliacao.idcliente = this.cliente.idcliente;
-    avaliacao.idempresa = this.empresa.idempresa;
-
-    this.methods.insertAvaliacao(avaliacao).subscribe(
-      res => {
-        if (res != null) {
-          this.bsModalRef.hide();
-          this.modalService.showAlertSuccess('Avaliado com sucesso!');
-        }
-      }
-    );
+    this.result.next(this.message);
+    this.bsModalRef.hide();
   }
 
   onCancel() {
+    this.result.next(null);
     this.bsModalRef.hide();
   }
 

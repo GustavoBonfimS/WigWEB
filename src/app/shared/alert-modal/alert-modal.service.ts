@@ -55,5 +55,6 @@ export class AlertModalService {
   showRatingModal(empresa: Empresa) {
     const bsModalRef: BsModalRef = this.modalService.show(RatingModalComponent);
     bsModalRef.content.empresa = empresa;
+    return (bsModalRef.content as RatingModalComponent).result;
   }
 }
