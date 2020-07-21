@@ -27,9 +27,14 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.empresa = new Empresa();
-    this.activateRoute.params.pipe(take(1)).subscribe((data: any) => this.empresa.login = data.nome);
-
-    this.methods.getEmpresaPeloNome(this.empresa.login).subscribe(
+    this.activateRoute.params
+    .pipe(
+      take(1),
+      switchMap(params => {
+        return this.methods.getEmpresaPeloNome(params.nome);
+      })
+    )
+    .subscribe(
       empresa => {
         this.empresa = empresa;
         this.avaliacoes$ = this.methods.getAvaliacoesEmpresas(this.empresa.idempresa);
