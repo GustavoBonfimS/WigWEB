@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AlertModalComponent } from './alert-modal.component';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
+import { RatingModalComponent } from '../rating-modal/rating-modal.component';
+import { Empresa } from '../classes/Empresa';
 
 enum AlertTypes {
   DANGER = 'danger',
@@ -48,5 +50,10 @@ export class AlertModalService {
     }
 
     return (bsModalRef.content as ConfirmModalComponent).confirmResult;
+  }
+
+  showRatingModal(empresa: Empresa) {
+    const bsModalRef: BsModalRef = this.modalService.show(RatingModalComponent);
+    bsModalRef.content.empresa = empresa;
   }
 }

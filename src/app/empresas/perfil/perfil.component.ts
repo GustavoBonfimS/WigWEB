@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Empresa } from 'src/app/shared/classes/Empresa';
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
 
 @Component({
   selector: 'app-perfil',
@@ -16,7 +17,8 @@ export class PerfilComponent implements OnInit {
   avaliacoes$: Observable<Empresa[]>;
 
   constructor(private methods: MethodsService,
-    private activateRoute: ActivatedRoute) { }
+              private activateRoute: ActivatedRoute,
+              private modalService: AlertModalService) { }
 
   ngOnInit(): void {
     this.empresa = new Empresa();
@@ -28,6 +30,10 @@ export class PerfilComponent implements OnInit {
         this.avaliacoes$ = this.methods.getAvaliacoesEmpresas(this.empresa.idempresa);
       }
     );
+  }
+
+  fazerAvaliacao() {
+    this.modalService.showRatingModal(this.empresa);
   }
 
 }

@@ -4,7 +4,6 @@ export class Avaliacao {
     idavaliacao: number;
     autor: string;
     conteudo: string;
-    empresa: string;
     data: Date;
     hora: Time;
     idcliente: number;

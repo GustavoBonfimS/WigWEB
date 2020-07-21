@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
     } else {
       this.search = this.search.trim();
       this.router.navigate(['pesquisar'], { queryParams: { emp: this.search } });
+      this.search = ''; 
     }
   }
 }
