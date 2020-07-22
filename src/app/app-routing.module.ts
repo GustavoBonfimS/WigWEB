@@ -6,10 +6,12 @@ import { AuthGuard } from './guards/auth.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CriarContaComponent } from './login/criar-conta/criar-conta.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
+import { EsqueceuSenhaComponent } from './login/esqueceu-senha/esqueceu-senha.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'criar-conta', component: CriarContaComponent },
+  { path: 'forget', component: EsqueceuSenhaComponent },
   {
     path: 'pagina-inicial', component: PaginaInicialComponent,
     canActivate: [AuthGuard], canLoad: [AuthGuard]

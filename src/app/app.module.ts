@@ -14,12 +14,14 @@ import { PaginaInicialModule } from './pagina-inicial/pagina-inicial.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CriarContaComponent } from './login/criar-conta/criar-conta.component';
 import { PesquisaModule } from './pesquisa/pesquisa.module';
+import { EsqueceuSenhaComponent } from './login/esqueceu-senha/esqueceu-senha.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NotFoundComponent,
-    CriarContaComponent
+    CriarContaComponent,
+    EsqueceuSenhaComponent
   ],
   imports: [
     SharedModule,
