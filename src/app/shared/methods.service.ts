@@ -78,6 +78,11 @@ export class MethodsService {
     return this.verificaErro(this.http.post(url, user));
   }
 
+  alterarSenha(user: Cliente) {
+    const url = 'api/cliente/forget';
+    return this.verificaErro(this.http.put(url, user));
+  }
+
   pesquisar(empresa: string) {
       const url = 'api/empresa/pesquisa/' + empresa;
       return this.verificaErro(this.http.get<Empresa[]>(url));
