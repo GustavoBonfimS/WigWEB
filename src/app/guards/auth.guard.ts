@@ -10,8 +10,8 @@ import { Route } from '@angular/compiler/src/core';
 export class AuthGuard implements CanActivate, CanLoad {
 
   constructor(
-    private _authService: AuthService,
-    private _router: Router
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   canActivate(
@@ -28,11 +28,11 @@ export class AuthGuard implements CanActivate, CanLoad {
 
   verificarAcesso() {
 
-    if (this._authService.isAuth()) {
+    if (this.authService.isAuth()) {
       return true;
     }
 
-    this._router.navigate(['/login'])
+    this.router.navigate(['/login']);
     return false;
   }
 

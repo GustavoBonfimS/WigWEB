@@ -6,11 +6,12 @@
   position: absolute;
   margin-left: auto;
   margin-right: auto;
+  padding-top: 30px;
   left: 0;
   right: 0;
 }
 
-router-outlet {
+.container {
   width: 100%;
   padding-bottom: 60px;
   position: relative;

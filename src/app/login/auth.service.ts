@@ -28,20 +28,19 @@ export class AuthService {
         if (res != null) {
           switch (res.perfil) {
             case 'cliente':
+              this.mostrarMenu.emit(true);
               this.router.navigate(['/pagina-inicial']);
               this.clienteCacheData.setCliente(res);
               break;
             case 'admin':
               // redirect para modulo de admin
-              this.modalService.showAlertSuccess('modulo de admin não esta pronto');
-              return;
+              this.router.navigate(['/admin']);
+              break;
             case 'empresa':
               // redirect para modulo de empresa
               this.modalService.showAlertSuccess('modulo de empresa não esta pronto');
               return;
           }
-
-          this.mostrarMenu.emit(true);
           this.autenticado = true;
         } else {
           this.mostrarMenu.emit(false);
