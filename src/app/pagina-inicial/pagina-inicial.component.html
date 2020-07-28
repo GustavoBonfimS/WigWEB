@@ -3,10 +3,17 @@
     <h3>Avaliações Recentes</h3>
   </div> <br>
   <div class="row">
-    <div class="col" *ngFor="let av of avaliacoes$ | async">
+    <div class="col-4 pt-2" *ngFor="let av of avaliacoes$ | async">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title"> {{ av.autor }} </h5>
+          <div class="row">
+            <div class="col">
+              <h5 class="card-title"> {{ av.autor }} </h5>
+            </div>
+            <div class="col">
+              <h6 class="card-title mb-2 text-right"> {{ av.data | date:'dd/MM/yyyy' }} </h6>
+            </div>
+          </div>
           <h6 class="card-subtitle mb-2 text-muted"> {{ av.nomeEmpresa }} </h6>
           <p class="card-text"> {{ av.conteudo }} </p>
         </div>
