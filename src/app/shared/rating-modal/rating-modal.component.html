@@ -6,7 +6,8 @@
     </button>
   </div>
   <div class="modal-body">
-    <textarea name="message" cols="60" rows="5" [(ngModel)]="message" placeholder="escreva sua mensagem aqui"></textarea>
+    <label for="message" class="col-form-label">Mensagem:</label>
+    <textarea id="message" class="form-control"name="message" cols="60" rows="5" [(ngModel)]="message" placeholder="escreva sua mensagem aqui"></textarea>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-warning" (click)="onSend()">Enviar</button>

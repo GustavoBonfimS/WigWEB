@@ -30,6 +30,11 @@ export class MethodsService {
     return this.verificaErro(this.http.get<Avaliacao>(url));
   }
 
+  getAvaliacaoByid(id: number) {
+    const url = 'api/cliente/Avaliacao/get/id/' + id;
+    return this.verificaErro(this.http.get<Avaliacao>(url));
+  }
+
   getMinhasAvaliacoes(idcliente: number) {
     const url = 'api/cliente/Avaliacao/minhas/' + idcliente;
     return this.verificaErro(this.http.get<Avaliacao[]>(url));
