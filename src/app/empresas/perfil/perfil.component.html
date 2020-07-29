@@ -19,7 +19,14 @@
       <div class="col-4 pt-1" *ngFor="let av of avaliacoes$ | async">
         <div class="card" style="width: 18rem;">
           <div class="card-body">
-            <h5 class="card-title"> {{ av.autor }} </h5>
+            <div class="row">
+              <div class="col">
+                <h5 class="card-title"> {{ av.autor }} </h5>
+              </div>
+              <div class="col">
+                <h6 class="card-title mb-2 text-right"> {{ av.data | date:'dd/MM/yyyy' }} </h6>
+              </div>
+            </div>
             <p class="card-text"> {{ av.conteudo }} </p>
           </div>
         </div>

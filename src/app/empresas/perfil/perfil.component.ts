@@ -64,6 +64,7 @@ export class PerfilComponent implements OnInit {
     .subscribe(response => {
         if (response != null) {
           this.modalService.showAlertSuccess('Enviado com sucesso!');
+          this.avaliacoes$ = this.methods.getAvaliacoesEmpresas(this.empresa.idempresa);
         }
       }
     );
