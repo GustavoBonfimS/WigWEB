@@ -16,15 +16,14 @@
   <div class="col-9" style="padding-left: 40px;">
     <h1 class="text-center subtitle">Ultimas avaliações</h1>
     <div class="row">
-        <div class="col" *ngFor="let av of avaliacoes$ | async">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title"> {{ av.autor }} </h5>
-                  <p class="card-text"> {{ av.conteudo }} </p>
-                </div>
-              </div>
+      <div class="col-4 pt-1" *ngFor="let av of avaliacoes$ | async">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"> {{ av.autor }} </h5>
+            <p class="card-text"> {{ av.conteudo }} </p>
+          </div>
         </div>
+      </div>
     </div>
-
   </div>
 </div>

@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   submited = false;
 
   ngOnInit(): void {
+    window.history.forward();
     this.formulario = this.formBuilder.group({
       username: [null, Validators.required],
       senha: [null, Validators.required]
