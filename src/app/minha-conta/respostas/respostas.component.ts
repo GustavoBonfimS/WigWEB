@@ -19,7 +19,7 @@ export class RespostasComponent implements OnInit {
   constructor(
     private methods: MethodsService,
     private clienteCacheService: ClienteCacheDataService,
-    private alertoModalService: AlertModalService
+    private alertModalService: AlertModalService
   ) { }
 
   ngOnInit(): void {
@@ -31,7 +31,7 @@ export class RespostasComponent implements OnInit {
     this.respostas$.forEach(item => {
       this.methods.getAvaliacaoByid(item[index].idavaliacao).pipe(take(1))
         .subscribe(av => {
-          this.alertoModalService.shwoInfoRatingModal(av, item[index]);
+          this.alertModalService.shwoInfoRatingModal(av, item[index]);
         });
     });
   }

@@ -3,6 +3,8 @@ import { MethodsService } from '../shared/methods.service';
 import { Avaliacao } from '../shared/classes/Avaliacao';
 import { Empresa } from '../shared/classes/Empresa';
 import { Observable } from 'rxjs';
+import { AlertModalService } from '../shared/alert-modal/alert-modal.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pagina-inicial',
@@ -11,7 +13,10 @@ import { Observable } from 'rxjs';
 })
 export class PaginaInicialComponent implements OnInit {
 
-  constructor(private methods: MethodsService) { }
+  constructor(
+    private methods: MethodsService,
+    private alertModalService: AlertModalService
+  ) { }
 
   avaliacoes$: Observable<Avaliacao[]>;
 
@@ -20,7 +25,12 @@ export class PaginaInicialComponent implements OnInit {
     this.avaliacoes$ = this.methods.listAvaliacoes();
   }
 
-  buscarEmpresaPeloId(idempresa) {
-    return this.methods.getEmpresa(idempresa);
+  showRespostas(index: number) {
+    this.avaliacoes$.forEach(item => {
+      this.methods.getRespostasAvaliacao(item[index].idavaliacao).pipe(take(1))
+        .subscribe(av => {
+          this.alertModalService.shwoInfoRatingModal(av, item[index]);
+        });
+    });
   }
 }

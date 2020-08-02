@@ -3,7 +3,7 @@
     <h3>Avaliações Recentes</h3>
   </div> <br>
   <div class="row">
-    <div class="col-4 pt-2" *ngFor="let av of avaliacoes$ | async">
+    <div class="col-4 pt-2" *ngFor="let av of avaliacoes$ | async; let i = index">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
           <div class="row">
@@ -15,7 +15,15 @@
             </div>
           </div>
           <h6 class="card-subtitle mb-2 text-muted"> {{ av.nomeEmpresa }} </h6>
-          <p class="card-text"> {{ av.conteudo }} </p>
+          <div class="row">
+            <div class="col-7">
+              <p class="card-text"> {{ av.conteudo }} </p>              
+            </div>
+            <div class="col">
+               <button class="btn btn-sm btn-outline-warning"
+               (click)="showRespostas(i)">Ver resposta</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
