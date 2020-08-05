@@ -28,8 +28,8 @@ export class PaginaInicialComponent implements OnInit {
   showRespostas(index: number) {
     this.avaliacoes$.forEach(item => {
       this.methods.getRespostasAvaliacao(item[index].idavaliacao).pipe(take(1))
-        .subscribe(av => {
-          this.alertModalService.shwoInfoRatingModal(av, item[index]);
+        .subscribe(resposta => {
+          this.alertModalService.shwoInfoRatingModal(item[index], resposta);
         });
     });
   }

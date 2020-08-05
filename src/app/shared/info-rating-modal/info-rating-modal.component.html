@@ -9,10 +9,15 @@
     <h6 class="text-center font-weight-light">Avaliação</h6>
     <h6>{{ avaliacao?.autor }}</h6>
     <p class="text-justify">{{ avaliacao?.conteudo }}</p>
-    
+
     <h6 class="text-center font-weight-light">Resposta</h6>
-    <h6>{{ resposta?.autor }}</h6>
-    <p class="text-justify">{{ resposta?.conteudo }}</p>
+    <div *ngIf="resposta">
+      <h6>{{ resposta?.autor }}</h6>
+      <p class="text-justify">{{ resposta?.conteudo }}</p>
+    </div>
+    <div *ngIf="resposta == null">
+      A empresa ainda não respondeu essa avaliacação.
+    </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-warning" (click)="onCancel()">OK</button>
