@@ -36,6 +36,11 @@ const routes: Routes = [
     canActivate: [AuthGuard], canLoad: [AuthGuard]
   },
   {
+    path: 'empresa-env', loadChildren: () =>
+      import('./empresa-env/empresa-env.module').then(m => m.EmpresaEnvModule),
+    canActivate: [AuthGuard], canLoad: [AuthGuard]
+  },
+  {
     path: '', component: PaginaInicialComponent,
     canActivate: [AuthGuard], canLoad: [AuthGuard]
   },

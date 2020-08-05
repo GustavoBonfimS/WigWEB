@@ -38,8 +38,8 @@ export class AuthService {
               break;
             case 'empresa':
               // redirect para modulo de empresa
-              this.modalService.showAlertSuccess('modulo de empresa não esta pronto');
-              return;
+              this.router.navigate(['/empresa-env']);
+              break;
           }
           this.autenticado = true;
         } else {
