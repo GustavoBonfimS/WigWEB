@@ -71,7 +71,6 @@ export class AuthService {
     this.methods.cadastrar(user).pipe(
       take(1)
     ).subscribe((resposta: Cliente) => {
-      // tslint:disable-next-line: no-unused-expression
       if (resposta != null) {
         this.clienteCacheData.setCliente(resposta);
         this.mostrarMenu.emit(true);
