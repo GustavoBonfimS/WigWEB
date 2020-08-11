@@ -10,9 +10,16 @@ import { RatingModalComponent } from './rating-modal/rating-modal.component';
 import { FormsModule } from '@angular/forms';
 import { EmpresaCacheDataService } from './cache/empresa-cache-data.service'
 import { InfoRatingModalComponent } from './info-rating-modal/info-rating-modal.component';
+import { AnswerModalComponent } from './answer-modal/answer-modal.component';
 
 @NgModule({
-  declarations: [AlertModalComponent, ConfirmModalComponent, RatingModalComponent, InfoRatingModalComponent],
+  declarations: [
+    AlertModalComponent,
+    ConfirmModalComponent,
+    RatingModalComponent,
+    InfoRatingModalComponent,
+    AnswerModalComponent
+  ],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -32,7 +39,8 @@ import { InfoRatingModalComponent } from './info-rating-modal/info-rating-modal.
     AlertModalComponent,
     ConfirmModalComponent,
     RatingModalComponent,
-    InfoRatingModalComponent
+    InfoRatingModalComponent,
+    AnswerModalComponent
   ]
 })
 export class SharedModule { }

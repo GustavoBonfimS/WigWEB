@@ -6,6 +6,7 @@ import { RatingModalComponent } from '../rating-modal/rating-modal.component';
 import { Empresa } from '../classes/Empresa';
 import { Avaliacao } from '../classes/Avaliacao';
 import { InfoRatingModalComponent } from '../info-rating-modal/info-rating-modal.component';
+import { AnswerModalComponent } from '../answer-modal/answer-modal.component';
 
 enum AlertTypes {
   DANGER = 'danger',
@@ -60,9 +61,15 @@ export class AlertModalService {
     return (bsModalRef.content as RatingModalComponent).result;
   }
 
-  shwoInfoRatingModal(avaliacao: Avaliacao, resposta: Avaliacao) {
+  showInfoRatingModal(avaliacao: Avaliacao, resposta: Avaliacao) {
     const bsModalRef: BsModalRef = this.modalService.show(InfoRatingModalComponent);
     bsModalRef.content.avaliacao = avaliacao;
     bsModalRef.content.resposta = resposta;
+  }
+
+  showAnswerModal(avaliacao: Avaliacao) {
+    const bsModalRef: BsModalRef = this.modalService.show(AnswerModalComponent);
+    bsModalRef.content.avaliacao = avaliacao;
+    return (bsModalRef.content as AnswerModalComponent).result;
   }
 }

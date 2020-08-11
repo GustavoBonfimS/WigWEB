@@ -31,7 +31,7 @@ export class AvaliacoesComponent implements OnInit {
     this.avaliacoes$.forEach(item => {
       this.methods.getRespostasAvaliacao(item[index].idavaliacao).pipe(take(1))
         .subscribe(resposta => {
-          this.alertModalService.shwoInfoRatingModal(item[index], resposta);
+          this.alertModalService.showInfoRatingModal(item[index], resposta);
         });
     });
   }
