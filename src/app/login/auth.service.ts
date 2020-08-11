@@ -6,6 +6,7 @@ import { Cliente } from '../shared/classes/Cliente';
 import { ClienteCacheDataService } from '../shared/cache/cliente-cache-data.service';
 import { FormGroup } from '@angular/forms';
 import { take } from 'rxjs/operators';
+import { EmpresaCacheDataService } from '../shared/cache/empresa-cache-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthService {
   constructor(private router: Router,
               private methods: MethodsService,
               private modalService: AlertModalService,
+              private empresaCacheData: EmpresaCacheDataService,
               private clienteCacheData: ClienteCacheDataService) { }
 
   private autenticado = false;
@@ -39,7 +41,7 @@ export class AuthService {
             case 'empresa':
               // redirect para modulo de empresa
               this.router.navigate(['/empresa-env']);
-              
+              this.empresaCacheData.setEmpresa(res);
               break;
           }
           this.autenticado = true;

@@ -112,7 +112,7 @@ export class MethodsService {
   private verificaErro(obs: Observable<any>) {
     return obs.pipe(
       catchError(err => {
-        this.alertModalService.showAlertDanger('erro ao se conectar ao servidor, tente novamente mais tarde');
+        this.alertModalService.showAlertDanger('Erro ao se conectar ao servidor, tente novamente mais tarde');
         return EMPTY;
       })
     );
