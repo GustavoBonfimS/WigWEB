@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AlertModalService } from '../shared/alert-modal/alert-modal.service';
 import { MethodsService } from '../shared/methods.service';
 import { Cliente } from '../shared/classes/Cliente';
-import { ClienteCacheDataService } from '../shared/cliente-cache-data.service';
+import { ClienteCacheDataService } from '../shared/cache/cliente-cache-data.service';
 import { FormGroup } from '@angular/forms';
 import { take } from 'rxjs/operators';
 
@@ -39,6 +39,7 @@ export class AuthService {
             case 'empresa':
               // redirect para modulo de empresa
               this.router.navigate(['/empresa-env']);
+              
               break;
           }
           this.autenticado = true;

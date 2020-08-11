@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './login/auth.service';
-import { ClienteCacheDataService } from './shared/cliente-cache-data.service';
+import { ClienteCacheDataService } from './shared/cache/cliente-cache-data.service';
 import { Router } from '@angular/router';
 import { AlertModalService } from './shared/alert-modal/alert-modal.service';
 import { take } from 'rxjs/operators';

@@ -7,7 +7,7 @@ import { Observable, EMPTY } from 'rxjs';
 import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
 import { Avaliacao } from 'src/app/shared/classes/Avaliacao';
 import { Cliente } from 'src/app/shared/classes/Cliente';
-import { ClienteCacheDataService } from 'src/app/shared/cliente-cache-data.service';
+import { ClienteCacheDataService } from 'src/app/shared/cache/cliente-cache-data.service';
 
 @Component({
   selector: 'app-perfil',

@@ -1,1 +1,11 @@
-<p>avaliacoes works!</p>
+<div class="list-group">
+    <a class="list-group-item list-group-item-action"
+      [ngClass]="{'list-group-item-warning': itemHover}"
+      (mouseover)="itemHover=true"
+      (mouseout)="itemHover=false" *ngFor="let item of avaliacoes$ | async; let i = index"
+      [routerLink]=""
+      (click)="onSelect(i)">
+      {{ item.autor }} - {{ item.conteudo }} - {{ item.data | date: 'dd/MM/yyyy' }}
+    </a>
+</div>
+  

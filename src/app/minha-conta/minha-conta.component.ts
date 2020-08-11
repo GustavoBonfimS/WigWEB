@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../shared/classes/Usuario';
 import { Cliente } from '../shared/classes/Cliente';
 import { MethodsService } from '../shared/methods.service';
-import { ClienteCacheDataService } from '../shared/cliente-cache-data.service';
+import { ClienteCacheDataService } from '../shared/cache/cliente-cache-data.service';
 
 @Component({
   selector: 'app-minha-conta',

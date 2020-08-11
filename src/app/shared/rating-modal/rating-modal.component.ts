@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Empresa } from '../classes/Empresa';
-import { ClienteCacheDataService } from '../cliente-cache-data.service';
+import { ClienteCacheDataService } from '../cache/cliente-cache-data.service';
 import { Cliente } from '../classes/Cliente';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';

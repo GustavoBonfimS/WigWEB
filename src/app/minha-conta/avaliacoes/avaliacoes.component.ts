@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MethodsService } from 'src/app/shared/methods.service';
 import { Observable } from 'rxjs';
 import { Avaliacao } from 'src/app/shared/classes/Avaliacao';
-import { ClienteCacheDataService } from 'src/app/shared/cliente-cache-data.service';
+import { ClienteCacheDataService } from 'src/app/shared/cache/cliente-cache-data.service';
 import { take } from 'rxjs/operators';
 import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
 
