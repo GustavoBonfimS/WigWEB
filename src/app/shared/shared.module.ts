@@ -8,6 +8,7 @@ import { AlertModalService } from './alert-modal/alert-modal.service';
 import { ClienteCacheDataService } from './cache/cliente-cache-data.service';
 import { RatingModalComponent } from './rating-modal/rating-modal.component';
 import { FormsModule } from '@angular/forms';
+import { EmpresaCacheDataService } from './cache/empresa-cache-data.service'
 import { InfoRatingModalComponent } from './info-rating-modal/info-rating-modal.component';
 
 @NgModule({
@@ -24,7 +25,8 @@ import { InfoRatingModalComponent } from './info-rating-modal/info-rating-modal.
   providers: [
     MethodsService,
     AlertModalService,
-    ClienteCacheDataService
+    ClienteCacheDataService,
+    EmpresaCacheDataService
   ],
   entryComponents: [
     AlertModalComponent,
