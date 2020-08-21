@@ -13,8 +13,12 @@ import { Cliente } from './classes/Cliente';
 })
 export class MethodsService {
 
-  constructor(private http: HttpClient,
-              private alertModalService: AlertModalService) { }
+  constructor(
+    private http: HttpClient,
+    private alertModalService: AlertModalService
+  ) { }
+
+  // ------
 
   listAvaliacoes() {
     return this.verificaErro(this.http.get<Avaliacao[]>('api/cliente/Avaliacao/Listar'));
@@ -64,6 +68,11 @@ export class MethodsService {
     return this.verificaErro(this.http.get<Avaliacao[]>(url));
   }
 
+  deleteAvaliacao(idavaliacao: number) {
+      const url = 'api/cliente/Avaliacao/delete/' + idavaliacao;
+      return this.verificaErro(this.http.get<boolean>(url));
+  }
+
   // ------
 
   getUsuario(login: string) {
@@ -89,8 +98,8 @@ export class MethodsService {
   }
 
   pesquisar(empresa: string) {
-      const url = 'api/empresa/pesquisa/' + empresa;
-      return this.verificaErro(this.http.get<Empresa[]>(url));
+    const url = 'api/empresa/pesquisa/' + empresa;
+    return this.verificaErro(this.http.get<Empresa[]>(url));
   }
 
   // -----
