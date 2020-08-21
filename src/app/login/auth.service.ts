@@ -13,14 +13,18 @@ import { EmpresaCacheDataService } from '../shared/cache/empresa-cache-data.serv
 })
 export class AuthService {
 
-  constructor(private router: Router,
-              private methods: MethodsService,
-              private modalService: AlertModalService,
-              private empresaCacheData: EmpresaCacheDataService,
-              private clienteCacheData: ClienteCacheDataService) { }
-
+  typeUser: string;
+  private userId: number;
   private autenticado = false;
   mostrarMenu = new EventEmitter<boolean>();
+
+  constructor(
+    private router: Router,
+    private methods: MethodsService,
+    private modalService: AlertModalService,
+    private empresaCacheData: EmpresaCacheDataService,
+    private clienteCacheData: ClienteCacheDataService
+  ) { }
 
   validarLogin(login, senha) {
 
@@ -28,18 +32,20 @@ export class AuthService {
     this.methods.onLogin(login, senha)
       .subscribe((res: any) => {
         if (res != null) {
+          this.userId = res.idusuario;
           switch (res.perfil) {
             case 'cliente':
+              this.typeUser = 'cliente';
               this.mostrarMenu.emit(true);
               this.router.navigate(['/pagina-inicial']);
               this.clienteCacheData.setCliente(res);
               break;
             case 'admin':
-              // redirect para modulo de admin
+              this.typeUser = 'admin';
               this.router.navigate(['/admin']);
               break;
             case 'empresa':
-              // redirect para modulo de empresa
+              this.typeUser = 'empresa';
               this.router.navigate(['/empresa-env']);
               this.empresaCacheData.setEmpresa(res);
               break;
@@ -52,9 +58,16 @@ export class AuthService {
       });
   }
 
-  // retorna se o usuario esta autenticado ou não para guarda de rotas
   isAuth() {
     return this.autenticado;
+  }
+
+  isLogado() {
+    this.methods.verifyLogin(this.userId)
+    .pipe(take(1))
+    .subscribe((res: boolean) => {
+      return res;
+    });
   }
 
   logOut() {

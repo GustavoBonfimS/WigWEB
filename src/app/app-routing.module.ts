@@ -14,21 +14,21 @@ const routes: Routes = [
   { path: 'forget', component: EsqueceuSenhaComponent },
   {
     path: 'pagina-inicial', component: PaginaInicialComponent,
-    canActivate: [AuthGuard], canLoad: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'pesquisar', component: PesquisaComponent,
-    canActivate: [AuthGuard], canLoad: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'empresas', loadChildren: () =>
       import('./empresas/empresas.module').then(m => m.EmpresasModule),
-    canActivate: [AuthGuard], canLoad: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'minha-conta', loadChildren: () =>
       import('./minha-conta/minha-conta.module').then(m => m.MinhaContaModule),
-    canActivate: [AuthGuard], canLoad: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'admin', loadChildren: () =>
@@ -38,11 +38,11 @@ const routes: Routes = [
   {
     path: 'empresa-env', loadChildren: () =>
       import('./empresa-env/empresa-env.module').then(m => m.EmpresaEnvModule),
-    canActivate: [AuthGuard], canLoad: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: '', component: PaginaInicialComponent,
-    canActivate: [AuthGuard], canLoad: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   { path: '**', component: NotFoundComponent }
 ];

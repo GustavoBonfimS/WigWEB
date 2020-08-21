@@ -87,6 +87,16 @@ export class MethodsService {
     return this.verificaErro(this.http.post(url, user));
   }
 
+  onLogOut(idusuario: number) {
+    const url = 'api/usuario/logout/' + idusuario;
+    return this.verificaErro(this.http.get<boolean>(url));
+  }
+
+  verifyLogin(idusuario: number) {
+    const url = 'api/usuario/verifylogin/' + idusuario;
+    return this.verificaErro(this.http.get<boolean>(url));
+  }
+
   cadastrar(user: Cliente) {
     const url = 'api/usuario/Inserir';
     return this.verificaErro(this.http.post(url, user));

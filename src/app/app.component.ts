@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from './login/auth.service';
 import { ClienteCacheDataService } from './shared/cache/cliente-cache-data.service';
 import { Router } from '@angular/router';
@@ -10,15 +10,21 @@ import { take } from 'rxjs/operators';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'WigWEB';
 
   mostrarMenu = false;
   search = '';
 
-  constructor(private authService: AuthService,
-              private alertModal: AlertModalService,
-              private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private alertModal: AlertModalService,
+    private router: Router
+  ) { }
+
+  ngOnDestroy(): void {
+    this.authService.logOut();
+  }
 
   ngOnInit(): void {
     this.authService.mostrarMenu.subscribe(
@@ -28,12 +34,12 @@ export class AppComponent implements OnInit {
 
   sair() {
     this.alertModal.showConfirm('Sair', 'Tem certeza que deseja sair da aplicação?', 'sim', 'cancelar')
-    .pipe(take(1))
-    .subscribe((res: boolean) => {
-      if (res) {
-        this.authService.logOut();
-      }
-    });
+      .pipe(take(1))
+      .subscribe((res: boolean) => {
+        if (res) {
+          this.authService.logOut();
+        }
+      });
   }
 
   pesquisar() {
@@ -42,7 +48,7 @@ export class AppComponent implements OnInit {
     } else {
       this.search = this.search.trim();
       this.router.navigate(['pesquisar'], { queryParams: { emp: this.search } });
-      this.search = ''; 
+      this.search = '';
     }
   }
 }
