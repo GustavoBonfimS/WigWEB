@@ -12,8 +12,8 @@
             </div>
             <div class="col">
               <h6 class="card-title mb-2 text-right"> {{ av.data | date:'dd/MM/yyyy' }} </h6>
-              <button *ngIf="showDeleteButton(av.idcliente)" type="button" 
-              class="close" data-dismiss="modal" aria-label="Fechar" (click)="onDelete(av.idavaliacao)">
+              <button *ngIf="showDeleteButton(av.idcliente)" type="button" class="close" data-dismiss="modal"
+                aria-label="Fechar" (click)="onDelete(av.idavaliacao)">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -21,11 +21,10 @@
           <h6 class="card-subtitle mb-2 text-muted"> {{ av.nomeEmpresa }} </h6>
           <div class="row">
             <div class="col-7">
-              <p class="card-text"> {{ av.conteudo }} </p>              
+              <p class="card-text"> {{ av.conteudo }} </p>
             </div>
             <div class="col">
-               <button class="btn btn-sm btn-outline-warning"
-               (click)="showRespostas(i)">Ver resposta</button>
+              <button class="btn btn-sm btn-outline-warning" (click)="showRespostas(i)">Ver resposta</button>
             </div>
           </div>
         </div>
