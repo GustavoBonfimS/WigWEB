@@ -79,6 +79,10 @@ export class MethodsService {
     return this.verificaErro(this.http.get<Usuario>('api/usuario/get/' + login));
   }
 
+  getUsuarioById(id: number) {
+    return this.verificaErro(this.http.get<Usuario>('api/usuario/get/id/' + id));
+  }
+
   onLogin(login: string, senha: string) {
     const url = '/api/usuario/Login';
     const user = new Usuario();
@@ -93,6 +97,9 @@ export class MethodsService {
   }
 
   verifyLogin(idusuario: number) {
+    if (idusuario === undefined) {
+      return false;
+    }
     const url = 'api/usuario/verifylogin/' + idusuario;
     return this.verificaErro(this.http.get<boolean>(url));
   }
@@ -100,6 +107,16 @@ export class MethodsService {
   cadastrar(user: Cliente) {
     const url = 'api/usuario/Inserir';
     return this.verificaErro(this.http.post(url, user));
+  }
+
+  getCliente(login: string) {
+    const url = 'api/cliente/get/' + login;
+    return this.verificaErro(this.http.get<Cliente>(url));
+  }
+
+  getClienteByUserId(id: number) {
+    const url = 'api/cliente/get/id/user/' + id;
+    return this.verificaErro(this.http.get<Cliente>(url));
   }
 
   alterarSenha(user: Cliente) {
@@ -116,6 +133,10 @@ export class MethodsService {
 
   getEmpresa(idempresa: number) {
     return this.verificaErro(this.http.get<Empresa>('api/empresa/get/id/' + idempresa));
+  }
+
+  getEmpresaByIdUser(idusuario: number) {
+    return this.verificaErro(this.http.get<Empresa>('api/empresa/get/id/user/' + idusuario));
   }
 
   getEmpresaPeloNome(nome: string) {

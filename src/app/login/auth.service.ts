@@ -5,8 +5,9 @@ import { MethodsService } from '../shared/methods.service';
 import { Cliente } from '../shared/classes/Cliente';
 import { ClienteCacheDataService } from '../shared/cache/cliente-cache-data.service';
 import { FormGroup } from '@angular/forms';
-import { take } from 'rxjs/operators';
+import { take, tap, map } from 'rxjs/operators';
 import { EmpresaCacheDataService } from '../shared/cache/empresa-cache-data.service';
+import { AdminCacheDataService } from '../shared/cache/admin-cache-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ import { EmpresaCacheDataService } from '../shared/cache/empresa-cache-data.serv
 export class AuthService {
 
   typeUser: string;
-  private userId: number;
+  private userId: number = parseInt(localStorage.getItem('userId'), 10) || undefined;
   private autenticado = false;
   mostrarMenu = new EventEmitter<boolean>();
 
@@ -23,7 +24,8 @@ export class AuthService {
     private methods: MethodsService,
     private modalService: AlertModalService,
     private empresaCacheData: EmpresaCacheDataService,
-    private clienteCacheData: ClienteCacheDataService
+    private clienteCacheData: ClienteCacheDataService,
+    private adminCacheData: AdminCacheDataService
   ) { }
 
   validarLogin(login, senha) {
@@ -51,9 +53,11 @@ export class AuthService {
               break;
           }
           this.autenticado = true;
+          localStorage.setItem('userId', this.userId.toString());
         } else {
           this.mostrarMenu.emit(false);
           this.modalService.showAlertDanger('login ou senha incorretos');
+          localStorage.setItem('userId', null);
         }
       });
   }
@@ -62,18 +66,61 @@ export class AuthService {
     return this.autenticado;
   }
 
-  isLogado() {
-    this.methods.verifyLogin(this.userId)
-    .pipe(take(1))
-    .subscribe((res: boolean) => {
-      return res;
-    });
+  setLoggedIn(value: boolean) {
+    this.autenticado = value;
+  }
+
+  verifyLoginOnServer() {
+    /**
+     * verifica se tem alguma id nos cookies do navegador,
+     * se houver ira buscar o tipo e o objeto no servidor e setar nas classes respectivas
+     */
+    if (this.userId != null && this.userId !== undefined) {
+
+      this.methods.getUsuarioById(this.userId).pipe(take(1))
+        .subscribe(res => {
+          this.setOnTypes(res);
+        });
+
+      return true;
+    }
+
+    /**
+     * se não houver nda nos cookies ira buscar se o usuario esta logado no servidor
+     * caso esteja ia buscar também o objeto inteiro e setar na classe respectiva
+     */
+    if (this.methods.verifyLogin(this.userId)) {
+      this.methods.getUsuarioById(this.userId).pipe(take(1))
+        .subscribe(res => {
+          this.setOnTypes(res);
+        });
+      return true;
+    }
+    return false;
+  }
+
+  private setOnTypes(res) {
+    this.autenticado = true;
+    switch (res.perfil) {
+      case 'cliente':
+        this.clienteCacheData.setCliente(res);
+        this.mostrarMenu.emit(true);
+        break;
+      case 'empresa':
+        this.empresaCacheData.setEmpresa(res);
+        this.router.navigate(['empresa-env/home']);
+        break;
+      case 'admin':
+        this.adminCacheData.setAdmin(res);
+        this.router.navigate(['admin']);
+    }
   }
 
   logOut() {
     this.autenticado = false;
     this.mostrarMenu.emit(false);
     this.clienteCacheData.logOut();
+    localStorage.clear();
     this.router.navigate(['login']);
   }
 
