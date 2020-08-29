@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from '../shared/classes/Usuario';
 import { Cliente } from '../shared/classes/Cliente';
-import { MethodsService } from '../shared/methods.service';
-import { ClienteCacheDataService } from '../shared/cache/cliente-cache-data.service';
+import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-minha-conta',
@@ -13,11 +12,14 @@ export class MinhaContaComponent implements OnInit {
 
   user: Cliente;
 
-  constructor(private methods: MethodsService,
-              private clienteCacheService: ClienteCacheDataService) { }
+  constructor(
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-      this.user = this.clienteCacheService.getClienteLogado();
+    this.route.data.pipe(take(1)).subscribe((info) => {
+      this.user = info.cliente;
+    });
   }
 
 

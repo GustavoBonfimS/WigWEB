@@ -7,6 +7,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { CriarContaComponent } from './login/criar-conta/criar-conta.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { EsqueceuSenhaComponent } from './login/esqueceu-senha/esqueceu-senha.component';
+import { MinhaContaResolverService } from './minha-conta/minha-conta.resolver.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -28,7 +29,7 @@ const routes: Routes = [
   {
     path: 'minha-conta', loadChildren: () =>
       import('./minha-conta/minha-conta.module').then(m => m.MinhaContaModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard], resolve: { cliente: MinhaContaResolverService }
   },
   {
     path: 'admin', loadChildren: () =>
