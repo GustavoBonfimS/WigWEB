@@ -44,6 +44,11 @@ export class MethodsService {
     return this.verificaErro(this.http.get<Avaliacao[]>(url));
   }
 
+  getMinhasAvaliacoesByIdUser(idusuario: number) {
+    const url = 'api/cliente/Avaliacao/minhas/iduser/' + idusuario;
+    return this.verificaErro(this.http.get<Avaliacao[]>(url));
+  }
+
   getAvaliacoesEmpresas(idempresa: number) {
     return this.verificaErro(this.http.get<Avaliacao[]>('api/cliente/Avaliacao/Listar/' + idempresa));
   }
