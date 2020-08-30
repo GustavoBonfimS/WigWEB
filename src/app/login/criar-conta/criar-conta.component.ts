@@ -34,7 +34,6 @@ export class CriarContaComponent implements OnInit {
   }
 
   cadastrar() {
-    console.log(this.formulario);
     this.submited = true;
     if (this.formulario.valid) {
       if (this.formulario.get('senha').value === this.formulario.get('confirmarSenha').value) {

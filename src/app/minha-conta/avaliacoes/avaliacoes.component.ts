@@ -23,7 +23,7 @@ export class AvaliacoesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.avaliacoes$ = this.methods.getMinhasAvaliacoes(this.clienteCacheService.getClienteLogado().idcliente)
+    this.avaliacoes$ = this.methods.getMinhasAvaliacoes(parseInt(localStorage.getItem('userId'), 10))
       .pipe(take(1));
   }
 

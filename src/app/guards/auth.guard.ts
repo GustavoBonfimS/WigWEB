@@ -28,7 +28,6 @@ export class AuthGuard implements CanActivate, CanLoad {
       // tera que ser redirecionado para as paginas corretas
       // tslint:disable-next-line: triple-equals
       if (next.component == PaginaInicialComponent.toString()) {
-        console.log(this.authService.typeUser);
         switch (this.authService.typeUser) {
           case 'empresa':
             this.router.navigate(['/empresa-env']);
@@ -48,7 +47,6 @@ export class AuthGuard implements CanActivate, CanLoad {
   }
 
   verificarAcesso() {
-
     // verifica se usuario esta logado para navegar entre as paginas após login
     // apenas vai cair aqui se lnavegar entre paginas inernamente
     if (this.authService.isAuth()) {

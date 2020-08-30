@@ -49,8 +49,6 @@ export class AvaliacoesComponent implements OnInit {
         })
       )
     .subscribe(res => {
-      console.log(res);
-      
       if (res != null) {
         this.alertModalService.showAlertSuccess('Sucesso ao responder avaliação!');
       }

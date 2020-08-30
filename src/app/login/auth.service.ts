@@ -75,16 +75,14 @@ export class AuthService {
      * verifica se tem alguma id nos cookies do navegador,
      * se houver ira buscar o tipo e o objeto no servidor e setar nas classes respectivas
      */
-    if (this.userId != null && this.userId !== undefined) {
-
-      this.methods.getUsuarioById(this.userId).pipe(take(1))
+    if (localStorage.getItem('userId')) {
+      this.methods.getUsuarioById(parseInt(localStorage.getItem('userId'), 10)).pipe(take(1))
         .subscribe(res => {
           this.setOnTypes(res);
         });
 
       return true;
     }
-
     /**
      * se não houver nda nos cookies ira buscar se o usuario esta logado no servidor
      * caso esteja ia buscar também o objeto inteiro e setar na classe respectiva

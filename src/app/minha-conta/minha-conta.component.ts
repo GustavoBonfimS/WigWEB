@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../shared/classes/Cliente';
 import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { take, switchMap, map, tap } from 'rxjs/operators';
+import { MethodsService } from '../shared/methods.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-minha-conta',
@@ -13,12 +15,26 @@ export class MinhaContaComponent implements OnInit {
   user: Cliente;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private methods: MethodsService
   ) { }
 
   ngOnInit(): void {
-    this.route.data.pipe(take(1)).subscribe((info) => {
-      this.user = info.cliente;
+    this.route.data.pipe(
+        take(1),
+        switchMap(data => {
+          if (!data.cliente) {
+            return this.methods.getClienteByUserId(parseInt(localStorage.getItem('userId'), 10));
+          }
+          return this.route.data;
+        }),
+      ).subscribe((c) => {
+        if (c.cliente) {
+          this.user = c.cliente;
+        } else {
+          this.user = c;
+        }
+
     });
   }
 

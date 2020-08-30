@@ -12,7 +12,7 @@ export class MinhaContaResolverService implements Resolve<Cliente>{
   constructor(
     private clienteCacheData: ClienteCacheDataService
   ) { }
-
+ 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Cliente | Observable<Cliente> | Promise<Cliente> {
