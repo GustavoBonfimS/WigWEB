@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     window.history.forward();
     this.formulario = this.formBuilder.group({
-      username: [null, Validators.required],
+      login: [null, Validators.required],
       senha: [null, Validators.required]
     });
   }
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   fazerLogin() {
     this.submited = true;
     if (this.formulario.valid) {
-      const login = this.formulario.get('username').value;
+      const login = this.formulario.get('login').value;
       const senha = this.formulario.get('senha').value;
       this.authService.validarLogin(login, senha);
     } else {

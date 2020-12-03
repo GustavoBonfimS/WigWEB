@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AvaliacoesComponent implements OnInit {
 
-  avaliacoes: Avaliacao[];
+  avaliacoes: Observable<Avaliacao[]>;
   itemHover = false;
 
   constructor(
@@ -25,24 +25,26 @@ export class AvaliacoesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.data
-      .pipe(
-        take(1),
-        switchMap(data => {
-          if (!data.avaliacoes) {
-            return this.methods.getMinhasAvaliacoes(parseInt(localStorage.getItem('userId'), 10));
-          } else {
-            return this.activatedRoute.data.pipe(take(1));
-          }
-        })
-      )
-      .subscribe(av => {
-        if (av.avaliacoes) {
-          this.avaliacoes = av.avaliacoes;
-        } else {
-          this.avaliacoes = av;
-        }
-      });
+    // this.activatedRoute.data
+    //   .pipe(
+    //     take(1),
+    //     switchMap(data => {
+    //       if (!data.avaliacoes) {
+    //         return this.methods.getMinhasAvaliacoes(parseInt(localStorage.getItem('userId'), 10));
+    //       } else {
+    //         return this.activatedRoute.data.pipe(take(1));
+    //       }
+    //     })
+    //   )
+    //   .subscribe(av => {
+    //     if (av.avaliacoes) {
+    //       this.avaliacoes = av.avaliacoes;
+    //     } else {
+    //       this.avaliacoes = av;
+    //     }
+    //   });
+    const userid = parseInt(localStorage.getItem('userId'), 10);
+    this.avaliacoes = this.methods.getMinhasAvaliacoesByIdUser(userid);
   }
 
   onSelect(idavaliacao: number, index: number) {

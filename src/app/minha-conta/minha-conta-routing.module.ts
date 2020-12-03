@@ -6,8 +6,7 @@ import { AvaliacoesResolverService } from './avaliacoes/avaliacoes.resolver.serv
 
 const routes: Routes = [
   { path: '', component: MinhaContaComponent, children: [
-    { path: 'avaliacoes', component: AvaliacoesComponent,
-      resolve: { avaliacoes: AvaliacoesResolverService } }
+    { path: 'avaliacoes', component: AvaliacoesComponent }
   ]},
 ];
 

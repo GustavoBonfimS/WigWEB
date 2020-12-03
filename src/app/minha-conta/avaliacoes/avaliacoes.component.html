@@ -2,11 +2,13 @@
   <p class="list-group-item list-group-item-action"
     [ngClass]="{'list-group-item-warning': itemHover}"
     (mouseover)="itemHover=true"
-    (mouseout)="itemHover=false" *ngFor="let item of avaliacoes; let i = index">
+    (mouseout)="itemHover=false" *ngFor="let item of avaliacoes | async; let i = index">
     {{ item.autor }} - {{ item.conteudo }} - {{ item.data | date: 'dd/MM/yyyy' }}
     <button class="btn btn-outline-danger float-right btn-sm"
     (click)="onDelete(item.idavaliacao)">Excluir</button>
     <button class="btn btn-outline-warning float-right btn-sm"
     (click)="onSelect(item.idavaliacao, i)">Visualizar</button>
   </p>
+
+  <!-- <p *ngFor="let item of avaliacoes | async">{{ item.autor }}</p> -->
 </div> 

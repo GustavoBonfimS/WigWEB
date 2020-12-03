@@ -21,61 +21,56 @@ export class MethodsService {
   // ------
 
   listAvaliacoes() {
-    return this.verificaErro(this.http.get<Avaliacao[]>('api/cliente/Avaliacao/Listar'));
+    return this.verificaErro(this.http.get<Avaliacao[]>('api/avaliacao/listar'));
   }
 
   insertAvaliacao(avaliacao: Avaliacao) {
-    const url = 'api/cliente/Avaliacao/Inserir';
+    const url = 'api/avaliacao/inserir';
     return this.verificaErro(this.http.post(url, avaliacao));
   }
 
   getAvaliacao(conteudo: string) {
-    const url = 'api/cliente/Avaliacao/get/' + conteudo;
+    const url = 'api/avaliacao/get/' + conteudo;
     return this.verificaErro(this.http.get<Avaliacao>(url));
   }
 
   getAvaliacaoByid(id: number) {
-    const url = 'api/cliente/Avaliacao/get/id/' + id;
+    const url = 'api/avaliacao/get/id/' + id;
     return this.verificaErro(this.http.get<Avaliacao>(url));
   }
 
   getMinhasAvaliacoes(idcliente: number) {
-    const url = 'api/cliente/Avaliacao/minhas/' + idcliente;
+    const url = 'api/avaliacao/minhas/' + idcliente;
     return this.verificaErro(this.http.get<Avaliacao[]>(url));
   }
 
   getMinhasAvaliacoesByIdUser(idusuario: number) {
-    const url = 'api/cliente/Avaliacao/minhas/iduser/' + idusuario;
+    const url = 'api/avaliacao/minhas/iduser/' + idusuario;
     return this.verificaErro(this.http.get<Avaliacao[]>(url));
   }
 
   getAvaliacoesEmpresas(idempresa: number) {
-    return this.verificaErro(this.http.get<Avaliacao[]>('api/cliente/Avaliacao/Listar/' + idempresa));
-  }
-
-  atualizarIndex(login: string) {
-    const url = 'api/cliente/atualizarIndex/' + login;
-    return this.verificaErro(this.http.get(url));
+    return this.verificaErro(this.http.get<Avaliacao[]>('api/avaliacao/listar/' + idempresa));
   }
 
   responderAvaliacao(avaliacao: Avaliacao) {
-    const url = 'api/cliente/Avaliacao/Responder';
+    const url = 'api/avaliacao/responder';
     return this.verificaErro(this.http.post(url, avaliacao));
   }
 
   getRespostasAvaliacao(idavaliacao: number) {
-    const url = 'api/cliente/Avaliacao/Resposta/get/' + idavaliacao;
+    const url = 'api/avaliacao/resposta/get/' + idavaliacao;
     return this.verificaErro(this.http.get(url));
   }
 
   getRespostasDoCliente(idcliente: number) {
-    const url = 'api/cliente/Avaliacao/Resposta/Listar/Cliente/' + idcliente;
+    const url = 'api/avaliacao/resposta/listar/cliente/' + idcliente;
     return this.verificaErro(this.http.get<Avaliacao[]>(url));
   }
 
   deleteAvaliacao(idavaliacao: number) {
-      const url = 'api/cliente/Avaliacao/delete/' + idavaliacao;
-      return this.verificaErro(this.http.get<boolean>(url));
+      const url = 'api/avaliacao/delete/' + idavaliacao;
+      return this.verificaErro(this.http.delete<boolean>(url));
   }
 
   // ------
@@ -89,7 +84,7 @@ export class MethodsService {
   }
 
   onLogin(login: string, senha: string) {
-    const url = '/api/usuario/Login';
+    const url = '/api/usuario/login';
     const user = new Usuario();
     user.login = login;
     user.senha = senha;
@@ -110,7 +105,7 @@ export class MethodsService {
   }
 
   cadastrar(user: Cliente) {
-    const url = 'api/usuario/Inserir';
+    const url = 'api/cliente/cadastrar';
     return this.verificaErro(this.http.post(url, user));
   }
 
@@ -129,12 +124,12 @@ export class MethodsService {
     return this.verificaErro(this.http.put(url, user));
   }
 
+  // -----
+
   pesquisar(empresa: string) {
     const url = 'api/empresa/pesquisa/' + empresa;
     return this.verificaErro(this.http.get<Empresa[]>(url));
   }
-
-  // -----
 
   getEmpresa(idempresa: number) {
     return this.verificaErro(this.http.get<Empresa>('api/empresa/get/id/' + idempresa));
@@ -149,7 +144,7 @@ export class MethodsService {
   }
 
   listEmpresas() {
-    return this.verificaErro(this.http.get<Empresa[]>('api/empresa/Listar'));
+    return this.verificaErro(this.http.get<Empresa[]>('api/empresa/listar'));
   }
 
   // -----

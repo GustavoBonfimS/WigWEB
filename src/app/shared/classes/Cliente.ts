@@ -2,5 +2,5 @@ import { Usuario } from './Usuario';
 
 export class Cliente extends Usuario {
     idcliente: number;
-    CPF: string;
+    cpf: string;
 }

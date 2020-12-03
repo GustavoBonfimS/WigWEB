@@ -5,6 +5,8 @@ import { Observable, EMPTY } from 'rxjs';
 import { AlertModalService } from '../shared/alert-modal/alert-modal.service';
 import { take, switchMap } from 'rxjs/operators';
 import { ClienteCacheDataService } from '../shared/cache/cliente-cache-data.service';
+import { SocketIOService } from '../shared/socket-io.service';
+import { NotificationModel } from '../shared/classes/NotificationModel';
 
 @Component({
   selector: 'app-pagina-inicial',
@@ -16,13 +18,17 @@ export class PaginaInicialComponent implements OnInit {
   constructor(
     private methods: MethodsService,
     private clienteCacheData: ClienteCacheDataService,
-    private alertModalService: AlertModalService
+    private alertModalService: AlertModalService,
+    private socketService: SocketIOService
   ) { }
 
   avaliacoes$: Observable<Avaliacao[]>;
 
   ngOnInit(): void {
     this.avaliacoes$ = this.methods.listAvaliacoes();
+    this.socketService.getNotifications().subscribe((ntf: NotificationModel) => {
+      this.alertModalService.showAlertWarning(`Sua avaliação em ${ntf.autor} foi respondida!`);
+    });
   }
 
   showRespostas(index: number) {

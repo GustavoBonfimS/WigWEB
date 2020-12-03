@@ -23,7 +23,7 @@ export class CriarContaComponent implements OnInit {
 
   ngOnInit(): void {
     this.formulario = this.builder.group({
-      username: [null, Validators.required],
+      login: [null, Validators.required],
       senha: [null, Validators.required],
       confirmarSenha: [null, Validators.required],
       email: [null, [Validators.email, Validators.required]],

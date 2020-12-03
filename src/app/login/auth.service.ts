@@ -57,7 +57,7 @@ export class AuthService {
         } else {
           this.mostrarMenu.emit(false);
           this.modalService.showAlertDanger('login ou senha incorretos');
-          localStorage.setItem('userId', null);
+          localStorage.clear();
         }
       });
   }
@@ -124,10 +124,10 @@ export class AuthService {
 
   cadastrar(form: FormGroup) {
     const user = new Cliente();
-    user.login = form.get('username').value;
+    user.login = form.get('login').value;
     user.senha = form.get('senha').value;
     user.email = form.get('email').value;
-    user.CPF = form.get('CPF').value;
+    user.cpf = form.get('CPF').value;
     user.perfil = 'cliente';
     this.methods.cadastrar(user).pipe(
       take(1)
@@ -136,6 +136,7 @@ export class AuthService {
         this.clienteCacheData.setCliente(resposta);
         this.mostrarMenu.emit(true);
         this.autenticado = true;
+        localStorage.setItem('userId', resposta.idusuario.toString());
         this.router.navigate(['/pagina-inicial']);
       }
     });

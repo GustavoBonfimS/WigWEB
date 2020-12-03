@@ -17,7 +17,7 @@ export class PesquisaComponent implements OnInit {
   isResultNotFound = false;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private methods: MethodsService) { }
+    private methods: MethodsService) { }
 
   ngOnInit(): void {
     this.result$ = this.activatedRoute.queryParams
@@ -31,7 +31,7 @@ export class PesquisaComponent implements OnInit {
             this.isResultNotFound = false;
           }
         })
-        );
+      );
   }
 
 }

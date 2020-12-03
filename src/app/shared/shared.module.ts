@@ -12,6 +12,7 @@ import { EmpresaCacheDataService } from './cache/empresa-cache-data.service';
 import { InfoRatingModalComponent } from './info-rating-modal/info-rating-modal.component';
 import { AnswerModalComponent } from './answer-modal/answer-modal.component';
 import { AdminCacheDataService } from './cache/admin-cache-data.service';
+import { SocketIOService } from './socket-io.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AdminCacheDataService } from './cache/admin-cache-data.service';
     AlertModalService,
     ClienteCacheDataService,
     EmpresaCacheDataService,
-    AdminCacheDataService
+    AdminCacheDataService,
+    SocketIOService
   ],
   entryComponents: [
     AlertModalComponent,

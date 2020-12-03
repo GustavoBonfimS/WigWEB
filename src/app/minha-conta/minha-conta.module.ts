@@ -5,6 +5,7 @@ import { MinhaContaComponent } from './minha-conta.component';
 import { MinhaContaRoutingModule } from './minha-conta-routing.module';
 import { MinhaContaResolverService } from './minha-conta.resolver.service';
 import { AvaliacoesResolverService } from './avaliacoes/avaliacoes.resolver.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { AvaliacoesResolverService } from './avaliacoes/avaliacoes.resolver.serv
   ],
   imports: [
     CommonModule,
+    FormsModule,
     MinhaContaRoutingModule
   ],
   providers: [

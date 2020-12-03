@@ -43,7 +43,9 @@ export class PerfilComponent implements OnInit {
         }
       );
 
-    this.cliente = this.clienteCacheData.getClienteLogado();
+    this.methods.getClienteByUserId(parseInt(localStorage.getItem('userId'), 10)).subscribe(user => {
+      this.cliente = user;
+    });
   }
 
   fazerAvaliacao() {

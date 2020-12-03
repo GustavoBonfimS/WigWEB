@@ -1,9 +1,9 @@
 import { Usuario } from './Usuario';
 
 export class Empresa extends Usuario {
-    
+
     idempresa: number;
-    CNPJ: string;
+    cnpj: string;
     tipo: string;
     endereco: string;
 }

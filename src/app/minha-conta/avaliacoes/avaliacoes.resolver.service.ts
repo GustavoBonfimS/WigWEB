@@ -19,6 +19,7 @@ export class AvaliacoesResolverService implements Resolve<Avaliacao[]> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
     ): Avaliacao[] | Observable<Avaliacao[]> {
-    return this.methods.getMinhasAvaliacoesByIdUser(parseInt(localStorage.getItem('userId'), 10));
+    const idUser = Number(localStorage.getItem('userId'));
+    return this.methods.getMinhasAvaliacoesByIdUser(idUser);
   }
 }
