@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { io } from 'socket.io-client';
 import { Observable } from 'rxjs';
-import { NotificationModel } from './classes/NotificationModel';
 import { Avaliacao } from './classes/Avaliacao';
 
 @Injectable({
@@ -12,11 +11,15 @@ export class SocketIOService {
   socket;
 
   constructor() {
-    this.socket = io('localhost:3333');
+    this.socket = io('localhost:3333', {
+      query: {
+        idCliente: 2
+      }
+    });
    }
 
-  getNotifications(): Observable<NotificationModel> {
-    return new Observable<NotificationModel>(observer => {
+  getNotifications(): Observable<Avaliacao> {
+    return new Observable<Avaliacao>(observer => {
       this.socket.on('newNotification', (notif) => {
         observer.next(notif);
       });

@@ -6,7 +6,6 @@ import { AlertModalService } from '../shared/alert-modal/alert-modal.service';
 import { take, switchMap } from 'rxjs/operators';
 import { ClienteCacheDataService } from '../shared/cache/cliente-cache-data.service';
 import { SocketIOService } from '../shared/socket-io.service';
-import { NotificationModel } from '../shared/classes/NotificationModel';
 
 @Component({
   selector: 'app-pagina-inicial',
@@ -17,7 +16,6 @@ export class PaginaInicialComponent implements OnInit {
 
   constructor(
     private methods: MethodsService,
-    private clienteCacheData: ClienteCacheDataService,
     private alertModalService: AlertModalService,
     private socketService: SocketIOService
   ) { }
@@ -26,7 +24,7 @@ export class PaginaInicialComponent implements OnInit {
 
   ngOnInit(): void {
     this.avaliacoes$ = this.methods.listAvaliacoes();
-    this.socketService.getNotifications().subscribe((ntf: NotificationModel) => {
+    this.socketService.getNotifications().subscribe((ntf: Avaliacao) => {
       this.alertModalService.showAlertWarning(`Sua avaliação em ${ntf.autor} foi respondida!`);
     });
   }
@@ -38,13 +36,6 @@ export class PaginaInicialComponent implements OnInit {
           this.alertModalService.showInfoRatingModal(item[index], resposta);
         });
     });
-  }
-
-  showDeleteButton(idcliente: number) {
-    if (idcliente === this.clienteCacheData.getClienteLogado().idcliente) {
-      return true;
-    }
-    return false;
   }
 
   onDelete(idavaliacao: number) {
