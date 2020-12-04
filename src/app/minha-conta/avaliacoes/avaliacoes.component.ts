@@ -19,38 +19,20 @@ export class AvaliacoesComponent implements OnInit {
 
   constructor(
     private methods: MethodsService,
-    private activatedRoute: ActivatedRoute,
     private alertModalService: AlertModalService,
     private clienteCacheService: ClienteCacheDataService
   ) { }
 
   ngOnInit(): void {
-    // this.activatedRoute.data
-    //   .pipe(
-    //     take(1),
-    //     switchMap(data => {
-    //       if (!data.avaliacoes) {
-    //         return this.methods.getMinhasAvaliacoes(parseInt(localStorage.getItem('userId'), 10));
-    //       } else {
-    //         return this.activatedRoute.data.pipe(take(1));
-    //       }
-    //     })
-    //   )
-    //   .subscribe(av => {
-    //     if (av.avaliacoes) {
-    //       this.avaliacoes = av.avaliacoes;
-    //     } else {
-    //       this.avaliacoes = av;
-    //     }
-    //   });
     const userid = parseInt(localStorage.getItem('userId'), 10);
     this.avaliacoes = this.methods.getMinhasAvaliacoesByIdUser(userid);
   }
 
-  onSelect(idavaliacao: number, index: number) {
-    this.methods.getRespostasAvaliacao(idavaliacao).pipe(take(1))
+  onSelect(av: Avaliacao, index: number) {
+    this.methods.getRespostasAvaliacao(av.idavaliacao).pipe(take(1))
       .subscribe(resposta => {
-        this.alertModalService.showInfoRatingModal(this.avaliacoes[index], resposta);
+        console.log(this.avaliacoes[index]);
+        this.alertModalService.showInfoRatingModal(av, resposta);
       });
   }
 
@@ -65,18 +47,13 @@ export class AvaliacoesComponent implements OnInit {
             return this.methods.deleteAvaliacao(idavaliacao);
           }
           return EMPTY;
-        }),
-        switchMap((deleted: boolean) => {
-          if (deleted) {
-            this.alertModalService.showAlertSuccess('Excluido com sucesso!');
-            // refresh avs
-            return this.methods.getMinhasAvaliacoes(parseInt(localStorage.getItem('userId'), 10));
-          }
-          return EMPTY;
         })
-      ).subscribe((avs) => {
-        if (avs) {
-          this.avaliacoes = avs;
+      ).subscribe((deleted) => {
+        console.log(deleted);
+        if (deleted) {
+          this.alertModalService.showAlertSuccess('Excluido com sucesso!');
+          const userid = parseInt(localStorage.getItem('userId'), 10);
+          this.avaliacoes = this.methods.getMinhasAvaliacoesByIdUser(userid);
         }
       });
   }
