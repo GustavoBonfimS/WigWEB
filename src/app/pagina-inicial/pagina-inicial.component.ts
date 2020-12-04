@@ -17,15 +17,22 @@ export class PaginaInicialComponent implements OnInit {
   constructor(
     private methods: MethodsService,
     private alertModalService: AlertModalService,
-    private socketService: SocketIOService
+    private socketService: SocketIOService,
+    private clienteCacheData: ClienteCacheDataService
   ) { }
 
   avaliacoes$: Observable<Avaliacao[]>;
 
   ngOnInit(): void {
     this.avaliacoes$ = this.methods.listAvaliacoes();
-    this.socketService.getNotifications().subscribe((ntf: Avaliacao) => {
-      this.alertModalService.showAlertWarning(`Sua avaliação em ${ntf.autor} foi respondida!`);
+    this.clienteCacheData.awaitToLoad().pipe(
+      take(1),
+      switchMap(c => {
+        this.socketService.connect(c.idcliente);
+        return this.socketService.getNotifications();
+      })
+      ).subscribe((ntf: Avaliacao) => {
+        this.alertModalService.showAlertWarning(`Sua avaliação em ${ntf.autor} foi respondida!`);
     });
   }
 

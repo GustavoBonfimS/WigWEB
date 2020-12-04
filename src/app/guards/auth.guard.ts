@@ -48,13 +48,13 @@ export class AuthGuard implements CanActivate, CanLoad {
 
   verificarAcesso() {
     // verifica se usuario esta logado para navegar entre as paginas após login
-    // apenas vai cair aqui se lnavegar entre paginas inernamente
+    // apenas vai cair aqui se navegar entre paginas internamente
     if (this.authService.isAuth()) {
       return true;
     }
 
     // caso atualize a pagina ou tente acessa por url especifico
-    // vai cair aqui e ira verifica r no servidor se esta logado
+    // vai cair aqui e ira verificar no servidor se esta logado
     if (this.authService.verifyLoginOnServer()) {
       return true;
     } else {

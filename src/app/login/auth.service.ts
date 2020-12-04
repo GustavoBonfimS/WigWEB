@@ -84,7 +84,7 @@ export class AuthService {
       return true;
     }
     /**
-     * se não houver nda nos cookies ira buscar se o usuario esta logado no servidor
+     * se não houver nada nos cookies ira buscar se o usuario esta logado no servidor
      * caso esteja ia buscar também o objeto inteiro e setar na classe respectiva
      */
     if (this.methods.verifyLogin(this.userId)) {

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Cliente } from '../classes/Cliente';
 
 @Injectable({
@@ -6,12 +7,17 @@ import { Cliente } from '../classes/Cliente';
 })
 export class ClienteCacheDataService {
 
-  constructor() { }
+  subject: Subject<Cliente>;
+
+  constructor() {
+    this.subject = new Subject<Cliente>();
+   }
 
   private cliente: Cliente;
 
   setCliente(res: Cliente) {
     this.cliente = res;
+    this.subject.next(res);
   }
 
   getClienteLogado() {
@@ -20,5 +26,9 @@ export class ClienteCacheDataService {
 
   logOut() {
     this.cliente = null;
+  }
+
+  awaitToLoad() {
+    return this.subject;
   }
 }
