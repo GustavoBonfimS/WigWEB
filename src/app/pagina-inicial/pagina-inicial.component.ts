@@ -6,6 +6,7 @@ import { AlertModalService } from '../shared/alert-modal/alert-modal.service';
 import { take, switchMap } from 'rxjs/operators';
 import { ClienteCacheDataService } from '../shared/cache/cliente-cache-data.service';
 import { SocketIOService } from '../shared/socket-io.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-pagina-inicial',
@@ -18,21 +19,36 @@ export class PaginaInicialComponent implements OnInit {
     private methods: MethodsService,
     private alertModalService: AlertModalService,
     private socketService: SocketIOService,
-    private clienteCacheData: ClienteCacheDataService
+    private clienteCacheData: ClienteCacheDataService,
+    private notificationService: NotificationsService
   ) { }
 
   avaliacoes$: Observable<Avaliacao[]>;
 
   ngOnInit(): void {
+    Notification.requestPermission();
     this.avaliacoes$ = this.methods.listAvaliacoes();
     this.clienteCacheData.awaitToLoad().pipe(
       take(1),
       switchMap(c => {
         this.socketService.connect(c.idcliente);
         return this.socketService.getNotifications();
-      })
-      ).subscribe((ntf: Avaliacao) => {
-        this.alertModalService.showAlertWarning(`Sua avaliação em ${ntf.autor} foi respondida!`);
+      }),
+      take(1)
+    ).subscribe((ntf: Avaliacao) => {
+      const tabIsFocused = !document.hidden;
+      if (tabIsFocused) {
+        this.notificationService.info('Avaliação respondida!', `Sua avaliação em ${ntf.autor} foi respondida!`, {
+          timeOut: 4000,
+          showProgressBar: true,
+          pauseOnHover: true,
+          clickToClose: true
+        });
+      } else {
+        var ntfOut = new Notification('Avaliação respondida!', {
+          body: `Sua avaliação em ${ntf.autor} foi respondida!`
+        })
+      }
     });
   }
 
@@ -43,25 +59,5 @@ export class PaginaInicialComponent implements OnInit {
           this.alertModalService.showInfoRatingModal(item[index], resposta);
         });
     });
-  }
-
-  onDelete(idavaliacao: number) {
-    const title = 'Excluir avaliação?';
-    const msg = 'Tem certeza que deseja excluir a avaliação?';
-    this.alertModalService.showConfirm(title, msg)
-      .pipe(
-        take(1),
-        switchMap((res: boolean) => {
-          if (res) {
-            return this.methods.deleteAvaliacao(idavaliacao);
-          }
-          return EMPTY;
-        })
-      ).subscribe((result: boolean) => {
-        if (result) {
-          this.alertModalService.showAlertSuccess('Excluido com sucesso!');
-          this.avaliacoes$ = this.methods.listAvaliacoes();
-        }
-      });
   }
 }

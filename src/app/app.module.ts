@@ -15,6 +15,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { CriarContaComponent } from './login/criar-conta/criar-conta.component';
 import { PesquisaModule } from './pesquisa/pesquisa.module';
 import { EsqueceuSenhaComponent } from './login/esqueceu-senha/esqueceu-senha.component';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { EsqueceuSenhaComponent } from './login/esqueceu-senha/esqueceu-senha.co
     ReactiveFormsModule,
     PaginaInicialModule,
     PesquisaModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    SimpleNotificationsModule.forRoot()
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
